@@ -1,0 +1,1 @@
+g++ -Wall -Wextra -Wno-unused -Werror Sample.class.cpp main.cpp -o output

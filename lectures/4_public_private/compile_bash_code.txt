@@ -1,0 +1,3 @@
+g++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output
+
+- public/private controls encapsulation of class (visibility)

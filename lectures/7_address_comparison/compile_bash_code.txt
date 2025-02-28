@@ -1,0 +1,5 @@
+g++ -Wall -Wextra -Wno-unused -Werror Sample.class.cpp main.cpp -o output  # -Werror bc &a == &a always
+
+- differnece between physical and structural equality
+- physical -> use same physical address
+- structural -> different instances of same class/structure (different addresses)

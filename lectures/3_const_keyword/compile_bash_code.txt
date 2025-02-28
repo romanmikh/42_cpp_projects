@@ -1,0 +1,8 @@
+g++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output
+
+- use const keyword as much as possible to ensure stability in C++
+- if writing a class member function that doesn't change the instance of the class, declare it as const
+
+- const cannot be assigned values after initialisation. In C they had to be on the same line:
+    int const a = 42; would work
+- 
