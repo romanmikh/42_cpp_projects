@@ -14,27 +14,19 @@
 #include "PhoneBook.class.hpp"
 #include "Contact.class.hpp"
 
-int main() {
+int main(void) {
 
 	PhoneBook book;
-	Contact contact;
 
-	std::cout << "Enter a first name:" << std::endl;
-	std::cin >> contact.name;
-	std::cout << "Enter a surname:" << std::endl;
-	std::cin >> contact.surname;
-	std::cout << "Enter a nickname:" << std::endl;
-	std::cin >> contact.nickname;
-	std::cout << "Enter a mobile number ;):" << std::endl;
-	std::cin >> contact.mobile_number;
-	std::cout << "Enter a secret:" << std::endl;
-	std::cin >> contact.secret;
-	
-	std::cout << "contact.name: " << contact.name << std::endl;
+	book.flag = 1;
+	std::cout << "> Hello! What would you like to do?" << std::endl;
 
-	contact.foo();
-	book.add_contact(contact);
-	std::cout << "New PhoneBook contact: " << book.contact[0].name << std::endl;
+	while (book.flag) {
+		book.action = "NULL";
+		std::cout << "> ADD, SEARCH or EXIT?" << std::endl;
+		std::cin >> book.action;
+		book.processAction(book);
+	}
 
 	return (0);
 }

@@ -12,23 +12,19 @@
 
 
 #include <iostream>
+#include <string>
 #include "Contact.class.hpp"
 
 Contact::Contact( void )
 {
-	std::cout << "Contact constructor called" << std::endl;
+	// std::cout << "Contact constructor called" << std::endl;
 	return ;
 
 }
 
 Contact::~Contact( void )
 {
-	std::cout << "Contact destructor called" << std::endl;
+	// std::cout << "Contact destructor called" << std::endl;
 	return ;
 }
 
-void	Contact::foo( void )
-{
-	std::cout << "foo has been called by Contact class" << std::endl;
-	return ;
-}

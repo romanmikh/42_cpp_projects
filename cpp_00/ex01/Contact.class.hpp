@@ -25,10 +25,8 @@ public:
 	std::string mobile_number;
 	std::string secret;
 
-	Contact( void );
-	~Contact( void );
-
-	void foo( void );
+	Contact(void);
+	~Contact(void);
 
 };
 

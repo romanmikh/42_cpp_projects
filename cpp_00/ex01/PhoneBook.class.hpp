@@ -14,17 +14,40 @@
 # define PHONEBOOK_CLASS_H
 
 #include <iostream>
+#include <string>
 #include "Contact.class.hpp"
 
 class PhoneBook {
 
 public:
 
-	std::string contacts[8];
-	PhoneBook( void );
-	~PhoneBook( void );
+	PhoneBook(void);
+	~PhoneBook(void);
 
-	void add_contact(Contact contact);
+	Contact		book[3];
+
+	int			max;
+	int			flag;
+	std::string	action;
+
+	void		processAction(PhoneBook &book);
+	Contact 	populateContact(Contact &contact);
+	void 		addContact(void);
+	int			isPhonebookFull(void);
+	void		setContact(Contact &contact);
+	void 		replaceFirstContact();
+	Contact 	getContact(void);
+	static int	getNbInst(void);
+	void 		incrementNbInst(void);
+	void		decrementNbInst(void);
+	void		printBook(void);
+	void		searchContact(int i);
+	std::string checkInput(std::string input);
+
+private:
+
+	static int	_nbInst;
+
 };
 
 #endif
