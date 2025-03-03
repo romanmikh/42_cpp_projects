@@ -19,14 +19,28 @@ class Contact {
 
 public:
 
-	std::string name;
-	std::string surname;
-	std::string nickname;
-	std::string mobile_number;
-	std::string secret;
-
 	Contact(void);
 	~Contact(void);
+
+	void 		setName(std::string name);
+	void 		setSurname(std::string surname);
+	void 		setNickname(std::string nickname);
+	void 		setMobileNumber(std::string mobile_number);
+	void 		setSecret(std::string secret);
+
+	std::string getName(void) const;
+	std::string getSurname(void) const;
+	std::string getNickname(void) const;
+	std::string getMobileNumber(void) const;
+	std::string getSecret(void) const;
+
+private:
+
+	std::string _name;
+	std::string _surname;
+	std::string _nickname;
+	std::string _mobile_number;
+	std::string _secret;
 
 };
 

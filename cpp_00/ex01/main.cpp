@@ -17,16 +17,17 @@
 int main(void) {
 
 	PhoneBook book;
+	std::string action;
 
-	book.flag = 1;
+	book.setFlag(1);
 	std::cout << "> Hello! What would you like to do?" << std::endl;
-
-	while (book.flag) {
-		book.action = "NULL";
+	while (book.getFlag()) {
 		std::cout << "> ADD, SEARCH or EXIT?" << std::endl;
-		std::cin >> book.action;
+		std::cin >> action;
+		if (action == "EXIT")
+			break;
+		book.setAction(action);
 		book.processAction(book);
 	}
-
 	return (0);
 }

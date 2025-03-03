@@ -21,32 +21,40 @@ class PhoneBook {
 
 public:
 
+	// member variables
+	static const int max = 8;
+
 	PhoneBook(void);
 	~PhoneBook(void);
 
-	Contact		book[3];
-
-	int			max;
-	int			flag;
-	std::string	action;
-
+	// adding contacts
 	void		processAction(PhoneBook &book);
-	Contact 	populateContact(Contact &contact);
 	void 		addContact(void);
-	int			isPhonebookFull(void);
-	void		setContact(Contact &contact);
+	int			isPhonebookFull(void) const;
 	void 		replaceFirstContact();
-	Contact 	getContact(void);
-	static int	getNbInst(void);
+	Contact 	populateContact(Contact &contact);
 	void 		incrementNbInst(void);
 	void		decrementNbInst(void);
-	void		printBook(void);
+
+	// searching contacts
+	void 		searchContactCheck(void);
 	void		searchContact(int i);
-	std::string checkInput(std::string input);
+	void		printBook(void) const;
+	std::string checkInput(std::string input) const;
+
+	// getters and setters
+	std::string	getAction(void) const;
+	void		setAction(std::string action);
+	int			getFlag(void) const;
+	void		setFlag(int flag);
+	static int	getNbInst(void);
 
 private:
 
-	static int	_nbInst;
+	Contact			book[max];
+	int				flag;
+	std::string		action;
+	static int		_nbInst;
 
 };
 
