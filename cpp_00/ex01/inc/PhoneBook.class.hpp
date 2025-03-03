@@ -51,9 +51,9 @@ public:
 
 private:
 
-	Contact			book[max];
-	int				flag;
-	std::string		action;
+	Contact			_book[max];
+	int				_flag;
+	std::string		_action;
 	static int		_nbInst;
 
 };

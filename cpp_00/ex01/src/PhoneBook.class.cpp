@@ -32,9 +32,9 @@ PhoneBook::~PhoneBook(void)
 ******************************************************************************/
 void	PhoneBook::processAction(PhoneBook &book)
 {	
-	if (book.action == "ADD")
+	if (getAction() == "ADD")
 		book.addContact();
-	else if (book.action == "SEARCH")
+	else if (getAction() == "SEARCH")
 		searchContactCheck();
 	else
 		std::cout << "> Invalid action" << std::endl;
@@ -52,7 +52,7 @@ void	PhoneBook::addContact(void)
 		replaceFirstContact();
 	else
 	{
-		populateContact(book[i]);
+		populateContact(_book[i]);
 	}	
 	incrementNbInst();
 	return ;
@@ -66,8 +66,8 @@ int	PhoneBook::isPhonebookFull(void) const
 void PhoneBook::replaceFirstContact()
 {
 	for (int i = max - 2; i >= 0; i--)
-		this->book[i + 1] = this->book[i];
-	populateContact(book[0]);
+		this->_book[i + 1] = this->_book[i];
+	populateContact(_book[0]);
 	decrementNbInst();
 	return ;
 }
@@ -139,10 +139,10 @@ void	PhoneBook::printBook(void) const
 	std::cout << "|------------------------------------------------------|" << std::endl;
 	std::cout << "|Name      |Surname   |Nickname  |Mobile    |Secret    |" << std::endl;
 	std::cout << "|------------------------------------------------------|" << std::endl;
-	while (i <= max-1 && !this->book[i].getName().empty())
+	while (i <= max-1 && !this->_book[i].getName().empty())
 	{
 
-		Contact contact = this->book[i];
+		Contact contact = this->_book[i];
 
 		std::cout << "|" << checkInput(contact.getName()) 
                   << "|" << checkInput(contact.getSurname())
@@ -173,7 +173,7 @@ std::string PhoneBook::checkInput(std::string input) const
 
 void	PhoneBook::searchContact(int i)
 {
-	Contact contact = this->book[i];
+	Contact contact = this->_book[i];
 
 	std::cout << "Name:		" << contact.getName() << std::endl
 			  << "Surname:	" << contact.getSurname() << std::endl
@@ -188,23 +188,23 @@ void	PhoneBook::searchContact(int i)
 ******************************************************************************/
 std::string PhoneBook::getAction(void) const
 {
-	return this->action;
+	return this->_action;
 }
 
 void PhoneBook::setAction(std::string action)
 {
-	this->action = action;
+	this->_action = action;
 	return ;
 }
 
 int PhoneBook::getFlag(void) const
 {
-	return this->flag;
+	return this->_flag;
 }
 
 void PhoneBook::setFlag(int flag)
 {
-	this->flag = flag;
+	this->_flag = flag;
 	return ;
 }
 

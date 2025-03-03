@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-# g++ -Wall -Wextra -Werror Contact.class.cpp PhoneBook.class.cpp main.cpp
+# g++ -Wall -Wextra -Werror ./src/*.cpp
 
 # Program file name
 NAME	= output
