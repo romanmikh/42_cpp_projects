@@ -11,7 +11,22 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 
 int main(void) {
+
+	std::string str = "HI THIS IS BRAIN";
+
+	std::string* stringPTR = &str; // * -> the address of the string
+	std::string& stringREF = str;  // & -> the string itself
+
+	std::cout << "Address of the string: 			" << &str << std::endl;
+	std::cout << "Address of the string using pointer: 	" << stringPTR << std::endl;
+	std::cout << "Address of the string using reference:	" << &stringREF << std::endl;
+
+	std::cout << "String using variable: 		" << str << std::endl;
+	std::cout << "String using pointer: 		" << *stringPTR << std::endl;
+	std::cout << "String using reference: 	" << stringREF << std::endl;
+
 	return (0);
 }

@@ -20,9 +20,9 @@ CC		= g++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98
 
 # Build files and directories
-SRC_PATH 	= ./src/
-OBJ_PATH	= ./obj/
-INC_PATH	= ./inc/
+SRC_PATH 	= ./
+OBJ_PATH	= ./
+INC_PATH	= ./
 SRC			= $(wildcard $(SRC_PATH)/*.cpp) $(wildcard $(SRC_PATH)/*/*.cpp)
 SRCS		= $(SRC)
 OBJ			= $(patsubst $(SRC_PATH)%, %, $(SRCS:.cpp=.o))
