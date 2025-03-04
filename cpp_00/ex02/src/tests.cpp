@@ -10,15 +10,40 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include "./inc/Account.hpp"
+#include "../inc/Account.hpp"
 
 
 int		main( void ) {
 
+	// ********************************************************************** //
+	// define vector/array of Account objects (from .hpp)
+	// define vector/array of int objects
+	// define tuple of pointers:
+	//	// 1st to first Account in accounts_t
+	//	// 2nd to first int in ints_t
+	// ********************************************************************** //
 	typedef std::vector<Account::t>							  accounts_t;
 	typedef std::vector<int>								  ints_t;
 	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;
 
+	// ********************************************************************** //
+	// amounts_size = 32/4 = 8
+	// confusing: accounts_t is a vector of Account objects (vector<Account>)
+	// vector<Account> has an implicit range constructor that takes two iterators
+	// so line 3 initialises variable accounts(), inputting *start and *end pointers of amounts[]
+	// this way each int in amounts[] is passed to Account constructor (.hpp)
+	// acc_begin/end then extract the iterators (not same as pointers) of the constructed vector of accounts
+	// ********************************************************************** //
+
+	// ********************************************************************** //
+	// so we start with an array of int amounts[] and we convert it to an 
+	// accounts_t<vector> object by using the implicit range constructor.
+	// Range constructor takes pointer to amounts[0] & to amounts[max] and 
+	// internally iterates over them all, calling Account(amounts[i]) for each
+	// so we end up with a vector of initialised Account objects as per .hpp
+	// ---
+	// from this we extract iterators to beg and end of the vector
+	// ********************************************************************** //
 	int	const				amounts[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };
 	size_t const			amounts_size( sizeof(amounts) / sizeof(int) );
 	accounts_t				accounts( amounts, amounts + amounts_size );

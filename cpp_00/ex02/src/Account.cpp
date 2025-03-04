@@ -15,56 +15,138 @@
 #include <ctime>
 #include "../inc/Account.hpp"
 
-Account::Account(int initial_deposit)
+Account::Account(int initial_deposit) : _amount(initial_deposit), \
+                                        _nbDeposits(0), \
+                                        _nbWithdrawals(0)
 {
-    std::cout << "Account constructor called" << std::endl;
+    this->_accountIndex = _nbAccounts;
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex 
+                << ";amount:" << _amount 
+                << ";created" << std::endl;
 
-    _nbAccounts = 0;
+    _nbAccounts += 1;
+    _totalAmount += _amount;
 }
 
 Account::~Account(void)
 {
-    std::cout << "Account destructor called" << std::endl;
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex 
+                << ";amount:" << _amount 
+                << ";closed" << std::endl;
 }
 
 // ************************************************************************** //
-// operations
+//                              Operations                                    //
 // ************************************************************************** //
-static void	displayAccountsInfos( void );
-
-void	makeDeposit( int deposit );
-bool	makeWithdrawal( int withdrawal );
-int		checkAmount( void ) const;
-void	displayStatus( void ) const;
-
-
-static void	_displayTimestamp( void )
+void	Account::displayAccountsInfos( void )
 {
-    std::cout << "[time_stamp] " << std::endl;
+    // removed static. static class but not static instance...
+    // accounts:8;total:20049;deposits:0;withdrawals:0
+    _displayTimestamp();
+    std::cout << " accounts:" << getNbAccounts() 
+                << ";total:" << getTotalAmount() 
+                << ";deposits:" << getNbDeposits() 
+                << ";withdrawals:" << getNbWithdrawals() 
+                << std::endl;
+}
+
+void	Account::displayStatus( void ) const
+{
+    // index:0;amount:47;deposits:1;withdrawals:0
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex 
+                << ";amount:" << _amount 
+                << ";deposits:" << _nbDeposits 
+                << ";withdrawals:" << _nbWithdrawals 
+                << std::endl;
+}
+
+void	Account::makeDeposit( int deposit )
+{
+    _nbDeposits += 1;
+    _totalNbDeposits += 1;
+    _totalAmount += deposit;
+    _amount += deposit;
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex 
+                << ";p_amount:" << _amount - deposit
+                << ";deposit:" << deposit 
+                << ";amount:" << _amount 
+                << ";nb_deposits:" << _nbDeposits
+                << std::endl;
+    
+}
+
+bool	Account::makeWithdrawal( int withdrawal )
+{
+    _amount -= withdrawal;
+    _displayTimestamp();
+    if (checkAmount() == 1)
+    {
+        _nbWithdrawals += 1;
+        _totalNbWithdrawals += 1;
+        _totalAmount -= withdrawal;
+        std::cout << " index:" << _accountIndex 
+                    << ";p_amount:" << _amount + withdrawal
+                    << ";withdrawal:" << withdrawal 
+                    << ";amount:" << _amount
+                    << ";nb_withdrawals:" << _nbWithdrawals
+                    << std::endl;
+        return true;
+    }
+    else 
+    {
+        _amount += withdrawal;
+        std::cout << " index:" << _accountIndex 
+                    << ";p_amount:" << _amount
+                    << ";withdrawal:" << "refused"
+                    << std::endl;
+    }
+    return false;
+}
+
+int		Account::checkAmount( void ) const
+{
+    if (_amount  < 0)
+        return 0;
+    return 1;
+}
+
+void	Account::_displayTimestamp( void )
+{
+    std::cout << "[20250304_091532]";
     return ;
 }
 
 // ************************************************************************** //
-// getters & setters
+//                                  Accessors                                 //
 // ************************************************************************** //
-static int	getNbAccounts( void )
+int	Account::getNbAccounts( void )
 {
-    return Account::_nbAccounts;
+    return _nbAccounts;
 }
 
-static int	getTotalAmount( void )
+int	Account::getTotalAmount( void )
 {
     return _totalAmount;
 }
 
-static int	getNbDeposits( void )
+int	Account::getNbDeposits( void )
 {
     return _totalNbDeposits;
 }
 
-static int	getNbWithdrawals( void )
+int	Account::getNbWithdrawals( void )
 {
     return _totalNbWithdrawals;
 }
 
-int Account::_nbAccounts = 0;
+// ************************************************************************** //
+//              statics, called once, only when program starts                //
+// ************************************************************************** //
+int		Account::_nbAccounts = 0;
+int		Account::_totalAmount = 0;
+int		Account::_totalNbDeposits = 0;
+int		Account::_totalNbWithdrawals = 0;
