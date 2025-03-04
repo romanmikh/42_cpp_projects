@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,51 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Zombie.hpp"
+#include "../inc/HumanB.hpp"
+#include "../inc/Weapon.hpp"
 
 // ************************************************************************** //
 //                      Constructors & Desctructors                           //
 // ************************************************************************** //
-Zombie::Zombie(void)
+HumanB::HumanB(std::string const name) : _name(name), _weapon(NULL)
 {
-    std::cout << "Nameless zombie spawn!" << std::endl;
+    std::cout << this->_name << " is ready to duel!" << std::endl;
     return ;
 }
 
-Zombie::Zombie(std::string name) : _name(name)
+HumanB::~HumanB(void)
 {
-    std::cout << name << " became a zombie!" << std::endl;
-    return ;
-}
-
-Zombie::~Zombie(void)
-{
-    std::cout << this->_getName() << " got cured :D" << std::endl;
+    std::cout << this->_name << " died :(" << std::endl;
     return ;
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-std::string Zombie::_getName(void) const
+void        HumanB::setWeapon(Weapon &weapon)
 {
-    return this->_name;
-}
-
-void        Zombie::setName(std::string const name)
-{
-    this->_name = name;
+    if (weapon.getType().empty())
+    {
+            std::cout << "Decides to use the ol' fisty cuffs" << std::endl;
+    }
+    else
+    {
+            std::cout << "He now has a weapon!" << std::endl;
+    }
+    if (weapon.getType().empty())
+		this->_weapon = NULL;
+	else
+		this->_weapon = &weapon;
     return ;
 }
+
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void Zombie::announce(void)
+void        HumanB::attack(void) const
 {
-    std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
+    std::cout << this->_name << " attacks with their " << _weapon->getType() << std::endl;
     return ;
 }
-
-
-

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,51 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Zombie.hpp"
+#include "../inc/Weapon.hpp"
 
 // ************************************************************************** //
 //                      Constructors & Desctructors                           //
 // ************************************************************************** //
-Zombie::Zombie(void)
+Weapon::Weapon(std::string type) : _type(type)
 {
-    std::cout << "Nameless zombie spawn!" << std::endl;
+    std::cout << "Weapon chosen!" << std::endl;
     return ;
 }
 
-Zombie::Zombie(std::string name) : _name(name)
+Weapon::~Weapon(void)
 {
-    std::cout << name << " became a zombie!" << std::endl;
-    return ;
-}
-
-Zombie::~Zombie(void)
-{
-    std::cout << this->_getName() << " got cured :D" << std::endl;
+    std::cout << "Weapon exploded :(" << std::endl;
     return ;
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-std::string Zombie::_getName(void) const
+std::string const &Weapon::getType(void) const
 {
-    return this->_name;
+    return this->_type;
 }
 
-void        Zombie::setName(std::string const name)
+void        Weapon::setType(std::string type)
 {
-    this->_name = name;
+    this->_type = type;
     return ;
 }
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void Zombie::announce(void)
-{
-    std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
-    return ;
-}
-
 
 

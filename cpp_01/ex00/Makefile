@@ -50,9 +50,13 @@ clean:
 
 # Remove program executable
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) valgrind_out.txt
 
 # Clean + remove executable
 re: fclean all
+
+# Valgrind rule
+valgrind: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --num-callers=20 --log-file=valgrind_out.txt ./output
 
 .PHONY: all re clean fclean
