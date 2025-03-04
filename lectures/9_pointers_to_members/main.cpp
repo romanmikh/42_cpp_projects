@@ -7,8 +7,8 @@ int main(void)
     Sample* instancep = &instance;  // pointer on Sample class instance
 
     int     Sample::*p = NULL;  // pointer on integer member of Sample class
-
-    p = &Sample::foo;
+    // adding the Sample:: specifies that it will point to a member attribute of the Sample class
+    p = &Sample::foo; // Setting Sample::*p to be the address of the foo member attribute
 
     std::cout << "Value of member foo: " << instance.foo << std::endl;
     instance.*p = 21;  // .* operator assigns value to specific ***instance*** of class member
