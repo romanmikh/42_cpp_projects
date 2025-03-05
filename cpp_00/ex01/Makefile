@@ -16,7 +16,7 @@
 NAME	= output
 
 # Compiler and compilation flags
-CC		= g++
+CC		= c++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98
 
 # Build files and directories

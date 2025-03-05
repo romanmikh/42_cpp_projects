@@ -12,6 +12,7 @@
 
 #include <string>
 #include <iostream>
+#include <cstdio>
 #include "Contact.class.hpp"
 #include "PhoneBook.class.hpp"
 
@@ -79,6 +80,12 @@ Contact PhoneBook::populateContact(Contact &contact)
 	std::string	secret;
 
 	std::cout << "> Enter first name: ";
+	if (std::cin.eof())
+		{
+			freopen("/dev/tty", "r", stdin);
+			std::cin.clear();  // Clear error state
+			std::cin.ignore(10000, '\n');  // Discard invalid input
+		}
 	std::cin >> name;
 	contact.setName(name);
 
@@ -116,6 +123,13 @@ void PhoneBook::searchContactCheck(void)
 		std::cin >> req;
 
 		while (std::cin.fail()) {
+			if (std::cin.eof())
+			{
+				std::freopen("/dev/tty", "r", stdin);
+				std::cin.clear();  // Clear error state
+				std::cin.ignore(10000, '\n');  // Discard invalid input
+				continue ;
+			}
 			std::cout << "> Invalid input. Enter a number between 0 and " \
 				<< _nbInst - 1 << ": ";
 			std::cin.clear();  // Clear error state
