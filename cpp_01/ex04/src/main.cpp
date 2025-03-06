@@ -14,6 +14,14 @@
 #include <iostream>
 #include <fstream>
 
+int 	isFileEmpty(std::ifstream &file) {
+	file.seekg(0, std::ios::end);
+	if (file.tellg() == 0)
+		return 1;
+	file.seekg(0, std::ios::beg);  // Reset position back to the beginning
+	return 0;
+}
+
 void 	printFile(std::string fileName)
 {
 	std::ifstream file(fileName.c_str());
@@ -62,9 +70,13 @@ int main(int argc, char **argv)
 	std::ofstream newFile(newFilename.c_str());
     if (!file) {
         std::cerr << "> Error: cannot open " << filename 
-					<< " for reading." << std::endl;
+					<< " for reading. Try 'chmod 600 file'" << std::endl;
         return 1;
     }
+	else if (isFileEmpty(file)) {
+		std::cerr << "> Error: " << filename << " is empty." << std::endl;
+		return 1;
+	}
     if (!newFile) {
         std::cerr << "> Error: cannot create" << newFilename << std::endl;
         return 1;
