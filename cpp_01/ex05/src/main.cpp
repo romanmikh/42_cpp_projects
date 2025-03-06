@@ -10,8 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "../inc/Harl.hpp"
 
 int main(void) {
-	return (0);
+    Harl harl;
+    std::string input;
+    std::string validLevels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
+
+    while (true) {
+        std::cout << "\nEnter level: ";
+        if (!std::getline(std::cin, input)) {
+			std::cout << "\n EOF detected. Exiting program." << std::endl;
+			std::exit(EXIT_SUCCESS);
+		}
+		
+
+        if (std::cin.eof()) {
+            std::freopen("/dev/tty", "r", stdin);
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            continue;
+        }
+        if (input.empty()) // Ignore empty input
+            continue;
+        if (input == "exit")
+            break;
+
+        bool valid = false;
+        for (int i = 0; i < 4; i++) {
+            if (input == validLevels[i]) {
+                valid = true;
+                break;
+            }
+        }
+        if (!valid) {
+            std::cout << "You silly billy, give Harl something he can work with" << std::endl;
+            continue;
+        }
+        harl.complain(input);
+    }
+
+    return 0;
 }
