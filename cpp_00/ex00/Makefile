@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-# g++ -Wall -Wextra -Werror megaphone.cpp
+# c++ -Wall -Wextra -Werror megaphone.cpp
 
 # Program file name
 NAME	= megaphone
 
 # Compiler and compilation flags
-CC		= g++
+CC		= c++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98
 
 # Build files and directories

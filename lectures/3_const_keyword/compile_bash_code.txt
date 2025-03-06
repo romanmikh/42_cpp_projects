@@ -1,4 +1,4 @@
-g++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output
+c++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output
 
 - use const keyword as much as possible to ensure stability in C++
 - if writing a class member function that doesn't change the instance of the class, declare it as const

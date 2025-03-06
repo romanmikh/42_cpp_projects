@@ -1,1 +1,1 @@
-g++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output
+c++ -Wall -Wextra -Werror Sample.class.cpp main.cpp -o output

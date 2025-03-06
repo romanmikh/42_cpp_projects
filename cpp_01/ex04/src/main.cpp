@@ -14,68 +14,70 @@
 #include <iostream>
 #include <fstream>
 
-// void    printFile(std::string filename)
-// {
-//     std::ifstream file(filename.c_str());
-//     if (!file) {
-//         std::cerr << "Error: cannot open" << filename << std::endl;
-//         return ;
-//     }
+void 	printFile(std::string fileName)
+{
+	std::ifstream file(fileName.c_str());
+	if (!file) {
+		std::cerr << "> Error: cannot open " << fileName 
+					<< " for reading." << std::endl;
+		return ;
+	}
 
-//     if (file.is_open())
-//         std::cout << file.rdbuf();
+	std::string newLine;
+	while (std::getline(file, newLine)) {
+		std::cout << newLine << std::endl;
+	}
+	file.close();
+}
 
-//     file.close();
-// }
+void myReplace(std::ifstream &file, std::ofstream &newFile, \
+				std::string s1, std::string s2) {
+	std::string line;
 
-// void copyFile(std::string filename)
-// {
-//     std::cout << "Copying file..." << std::endl;
-//     std::ifstream file(filename.c_str());
-//     if (!file) {
-//         std::cerr << "Error: cannot open" << filename << std::endl;
-//         return std::ofstream();
-//     }
-//     printFile(filename);
+	while (std::getline(file, line)) {
+		std::string updatedLine;
+		size_t pos = 0, lastPos = 0;
+		
+		while ((pos = line.find(s1, lastPos)) != std::string::npos) {
+			updatedLine += line.substr(lastPos, pos - lastPos);
+			updatedLine += s2;
+			lastPos = pos + s1.length();
+		}
+		updatedLine += line.substr(lastPos); // Append remainder of line
+		newFile << updatedLine << std::endl;
+	}
+}
 
-//     std::ofstream newFile(newFilename.c_str());
-//     if (!newFile) {
-//         std::cerr << "Error: cannot create" << newFilename << std::endl;
-//         return std::ofstream();
-//     }
-//     std::cout << "Created newFile!" << std::endl;
-//     return newFile;
-// }
-
-
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	if (argc != 4) {
-		std::cout << "Error: provide file, s1 and s2." << std::endl;
+		std::cout << "> Error: provide file, s1 and s2." << std::endl;
 		return (1);
 	}
-	std::string filename = argv[1];
+	std::string filename = argv[1], s1 = argv[2], s2 = argv[3];
 	std::string newFilename = filename + ".replace";
-	std::string s1 = argv[2];
-	std::string s2 = argv[3];
-	// -----------------------------------------------------------------------
-	std::cout << "Copying file..." << std::endl;
+	std::cout << "> Copying " << filename << "..." << std::endl;
+
     std::ifstream file(filename.c_str());
-    if (!file) {
-        std::cerr << "Error: cannot open" << filename << std::endl;
-        return 1;
-    }
 	std::ofstream newFile(newFilename.c_str());
-    if (!newFile) {
-        std::cerr << "Error: cannot create" << newFilename << std::endl;
+    if (!file) {
+        std::cerr << "> Error: cannot open " << filename 
+					<< " for reading." << std::endl;
         return 1;
     }
-    std::cout << "Created newFile!" << std::endl;
-	if (file.is_open())
-//         std::cout << file.rdbuf();
-	// -----------------------------------------------------------------------
-	(void)s1;
-	(void)s2;
+    if (!newFile) {
+        std::cerr << "> Error: cannot create" << newFilename << std::endl;
+        return 1;
+    }
+	myReplace(file, newFile, s1, s2);
+	file.close();
+	newFile.close();
 
-
+	std::string view;
+    std::cout << "> Created " << filename << ".replace!" << std::endl;
+	std::cout << "> Would you like to see it? y or n: ";
+	std::cin >> view;
+	if (view == "y")
+		printFile(newFilename);
 	return (0);
 }

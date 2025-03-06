@@ -1,4 +1,4 @@
-g++ -Wall -Wextra -Werror Sample1.class.cpp Sample2.class.cpp main.cpp -o output_s1_s2
+c++ -Wall -Wextra -Werror Sample1.class.cpp Sample2.class.cpp main.cpp -o output_s1_s2
 
 - structures are public by default
 - classes need us to specify public / private
