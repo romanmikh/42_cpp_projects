@@ -49,6 +49,9 @@ public:
 	void		setFlag(int flag);
 	static int	getNbInst(void);
 
+	// handlers
+	void		handleCtrlD(void);
+
 private:
 
 	Contact			_book[max];

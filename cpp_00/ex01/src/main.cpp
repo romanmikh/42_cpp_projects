@@ -27,6 +27,7 @@ int main(void) {
 		if (action == "EXIT")
 			break;
 		book.setAction(action);
+		book.handleCtrlD();
 		book.processAction(book);
 	}
 	return (0);

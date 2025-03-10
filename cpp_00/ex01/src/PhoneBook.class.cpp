@@ -13,6 +13,7 @@
 #include <string>
 #include <iostream>
 #include <cstdio>
+#include <cstdlib>
 #include "Contact.class.hpp"
 #include "PhoneBook.class.hpp"
 
@@ -40,6 +41,15 @@ void	PhoneBook::processAction(PhoneBook &book)
 	else
 		std::cout << "> Invalid action" << std::endl;
 	return ;
+}
+
+void	PhoneBook::handleCtrlD(void)
+{
+	if (std::cin.eof())
+		{
+			std::cout << "\nCTRL+D detected. Exiting program..." << std::endl;
+			std::exit(0);
+		}
 }
 
 // ************************************************************************** //
@@ -80,29 +90,28 @@ Contact PhoneBook::populateContact(Contact &contact)
 	std::string	secret;
 
 	std::cout << "> Enter first name: ";
-	if (std::cin.eof())
-		{
-			freopen("/dev/tty", "r", stdin);
-			std::cin.clear();  // Clear error state
-			std::cin.ignore(10000, '\n');  // Discard invalid input
-		}
 	std::cin >> name;
+	handleCtrlD();
 	contact.setName(name);
 
 	std::cout << "> Enter last name: ";
 	std::cin >> surname;
+	handleCtrlD();
 	contact.setSurname(surname);
 
 	std::cout << "> Enter nickname: ";
 	std::cin >> nickname;
+	handleCtrlD();
 	contact.setNickname(nickname);
 
 	std::cout << "> Enter mobile number: ";
 	std::cin >> mobile_number;
+	handleCtrlD();
 	contact.setMobileNumber(mobile_number);
 
 	std::cout << "> Enter secret: ";
 	std::cin >> secret;
+	handleCtrlD();
 	contact.setSecret(secret);
 
 	return contact;
@@ -122,14 +131,8 @@ void PhoneBook::searchContactCheck(void)
 			<< _nbInst - 1  << std::endl;
 		std::cin >> req;
 
+		handleCtrlD();
 		while (std::cin.fail()) {
-			if (std::cin.eof())
-			{
-				std::freopen("/dev/tty", "r", stdin);
-				std::cin.clear();  // Clear error state
-				std::cin.ignore(10000, '\n');  // Discard invalid input
-				continue ;
-			}
 			std::cout << "> Invalid input. Enter a number between 0 and " \
 				<< _nbInst - 1 << ": ";
 			std::cin.clear();  // Clear error state
@@ -235,4 +238,4 @@ void PhoneBook::decrementNbInst(void)
 	PhoneBook::_nbInst -= 1;
 }
 
-int PhoneBook::_nbInst = 0;  // initialize static=non-member attribute
+int PhoneBook::_nbInst = 0;  // initialize non-member attribute
