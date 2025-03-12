@@ -15,9 +15,12 @@
 
 #include <iostream>
 #include <string>
+#include <cstdio>
+#include <cstdlib>
+#include <csignal>
 
-void printStr(const std::string &colour = "RESET", const std::string &text1 = "", \
-                const std::string &text2 = "", const std::string &text3 = "", \
-                const std::string &text4 = "", const std::string &text5 = "");
+void	        handleCtrlD(void);
+unsigned int    getUnsignedInt(const std::string& prompt);
+void            printStr(const std::string& text, const std::string& colour = "RESET");
 
-#endif // UTILS_HPP
+#endif

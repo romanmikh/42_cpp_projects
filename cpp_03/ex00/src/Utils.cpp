@@ -12,9 +12,30 @@
 
 #include "../inc/Utils.hpp"
 
-void printStr(const std::string &colour, const std::string &text1, 
-             const std::string &text2, const std::string &text3, 
-             const std::string &text4, const std::string &text5) {
+void	handleCtrlD(void)
+{
+	if (std::cin.eof())
+    {
+        std::cout << "\nCTRL+D detected. Exiting program..." << std::endl;
+        std::exit(0);
+    }
+}
+
+unsigned int getUnsignedInt(const std::string& prompt) {
+    unsigned int value;
+    std::cout << prompt;
+    while (!(std::cin >> value)) {
+        handleCtrlD();
+        std::cout << "Invalid input. Enter a numeric value: ";
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+    }
+    handleCtrlD();
+    std::cin.ignore(1000, '\n');
+    return value;
+}
+
+void    printStr(const std::string &text, const std::string &colour) {
     std::string code;
     
     if (colour == "RESET") {
@@ -60,6 +81,5 @@ void printStr(const std::string &colour, const std::string &text1,
     } else {
         code = "\033[37m";  // Default White if no match
     }
-    std::cout << code << text1 << text2 << text3 << text4 << text5 
-              << "\033[0m" << std::endl;
+    std::cout << code << text << "\033[0m" << std::endl;
 }

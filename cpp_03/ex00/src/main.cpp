@@ -13,9 +13,43 @@
 #include "../inc/ClapTrap.hpp"
 #include "../inc/Utils.hpp"
 
-int main( void )
-{
+int main(void) {
+    std::string name;
+    std::string command;
+    std::string target;
+    unsigned int amount;
 
-    printStr("R", "World", "Hello", "Hello", "Hello");
+    std::cout << "Enter your ClapTrap name: ";
+    std::getline(std::cin, name);
+    handleCtrlD();    
+
+    ClapTrap clap(name);
+
+    while (true) {
+        clap.printStats();
+        std::cout << "Choose an action [attack, damage, repair, exit]: ";
+        std::getline(std::cin, command);
+        handleCtrlD();
+
+        if (command == "attack") {
+            std::cout << "Enter target: ";
+            std::getline(std::cin, name);
+            handleCtrlD();
+            clap.attack(name);
+        }
+        else if (command == "damage") {
+            amount = getUnsignedInt("Enter damage amount: ");
+            clap.takeDamage(amount);
+        }
+        else if (command == "repair") {
+            amount = getUnsignedInt("Enter repair amount: ");
+            clap.beRepaired(amount);
+        }
+        else if (command == "exit")
+            break;
+        else
+            printStr("Unknown command! Use: attack, damage, repair, or exit.", "P");
+    }
+
     return 0;
 }
