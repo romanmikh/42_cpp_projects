@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,77 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Harl.hpp"
+#include "../inc/Fixed.hpp"
+#include "../inc/Utils.hpp"
 
 // ************************************************************************** //
 //                      Constructors & Desctructors                           //
 // ************************************************************************** //
-Harl::Harl(void)
-{
-    std::cout << "Harl was born" << std::endl;
-    return ;
+Fixed::Fixed(void) {
+    printRM("Default constructor called :D", "G");
+    this->_val = 0;
 }
 
-Harl::~Harl(void)
-{
-    std::cout << "Harl exploded :(" << std::endl;
-    return ;
+Fixed::Fixed(const Fixed &other) {
+    printRM("Copy constructor called :D", "G");
+    this->_val = other.getRawBits();
+}
+
+Fixed &Fixed::operator = (const Fixed &other) {
+    printRM("Copy assignment operator overload called :D", "G");
+    if (this != &other)
+        this->_val = other.getRawBits();
+    return (*this);
+}
+
+Fixed::~Fixed(void) {
+    printRM("Destructor called :(", "G");
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
+int Fixed::getRawBits(void) const {
+    printRM("getRawBits member function called");
+    return (this->_val);
+}
 
+void    Fixed::setRawBits(int const raw) {
+    printRM("setRawBits member function called");
+    this->_val = raw;
+}
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
 
-void    Harl::complain( std::string level )
-{
-    typedef void    (Harl::*f)(void);  // pointer on member function
-
-    std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
-    f           functions[4] = { &Harl::_debug, &Harl::_info, 
-                                    &Harl::_warning, &Harl::_error };
-
-    // (harl.*f)();  // calls specific ***instance*** of class function
-    // (harl->*f)();  // ***pointer to instance***, not instnace
-    // we could use (harlInstance.*functions[i])(); instead if we did this:
-    // Harl harlInstance = *this;  // Create a local instance
-    for (int i = 0; i < 4; i++)
-    {
-        if (level == levels[i])
-        {
-            (this->*functions[i])();
-            return ;
-        }
-    }
-    return ;
-}
-
 // ************************************************************************** //
 //                             Private Functions                              //
 // ************************************************************************** //
-void   Harl::_debug( void )
-{
-    std::cout << "Debugging..." << std::endl;
-    return ;
-}
-
-void   Harl::_info( void )
-{
-    std::cout << "Info..." << std::endl;
-    return ;
-}
-
-void   Harl::_warning( void )
-{
-    std::cout << "Warning..." << std::endl;
-    return ;
-}
-
-void   Harl::_error( void )
-{
-    std::cout << "Error..." << std::endl;
-    return ;
-}

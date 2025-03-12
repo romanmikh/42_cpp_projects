@@ -10,23 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#include "../inc/Fixed.hpp"
+#include "../inc/Utils.hpp"
 
-int main(void) {
+int main(void)
+{
+    Fixed a;
+    Fixed b(a);
+    Fixed c;
 
-	std::string str = "HI THIS IS BRAIN";
+    c = b;
 
-	std::string* stringPTR = &str; // * -> the address of the string
-	std::string& stringREF = str;  // & -> ref=alias, same address in memory (same obj coneptually)
+    std::cout << a.getRawBits() << std::endl;
+    std::cout << b.getRawBits() << std::endl;
+    std::cout << c.getRawBits() << std::endl;
 
-	std::cout << "Address of the string: 			" << &str << std::endl;
-	std::cout << "Address of the string using pointer: 	" << stringPTR << std::endl;
-	std::cout << "Address of the string using reference:	" << &stringREF << std::endl;
-
-	std::cout << "String using variable: 		" << str << std::endl;
-	std::cout << "String using pointer: 		" << *stringPTR << std::endl;
-	std::cout << "String using reference: 	" << stringREF << std::endl;
-
-	return (0);
+    return 0;
 }

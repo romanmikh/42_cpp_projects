@@ -15,10 +15,10 @@
 #include <fstream>
 
 int 	isFileEmpty(std::ifstream &file) {
-	file.seekg(0, std::ios::end);
-	if (file.tellg() == 0)
+	file.seekg(0, std::ios::end);  	// move read pointer to eof
+	if (file.tellg() == 0) 			// check if pointer is at the beginning
 		return 1;
-	file.seekg(0, std::ios::beg);  // Reset position back to the beginning
+	file.seekg(0, std::ios::beg);  	// Reset position back to the beginning
 	return 0;
 }
 

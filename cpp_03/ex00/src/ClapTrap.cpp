@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Harl.hpp"
+#include "../inc/Utils.hpp"
+#include "../inc/ClapTrap.hpp"
 
 // ************************************************************************** //
-//                      Constructors & Desctructors                           //
+//             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-Harl::Harl(void)
-{
-    std::cout << "Harl was born" << std::endl;
+ClapTrap::ClapTrap(std::string name) : _name(name) {
+    std::cout << "ClapTrap " << name << " created! :D" << std::endl;
     return ;
 }
 
-Harl::~Harl(void)
-{
-    std::cout << "Harl exploded :(" << std::endl;
-    return ;
-}
+ClapTrap::~ClapTrap(void){}
+
+// ************************************************************************** //
+//                               Operators                                    //
+// ************************************************************************** //
 
 // ************************************************************************** //
 //                               Accessors                                    //
@@ -35,52 +35,10 @@ Harl::~Harl(void)
 //                             Public Functions                               //
 // ************************************************************************** //
 
-void    Harl::complain( std::string level )
-{
-    typedef void    (Harl::*f)(void);  // pointer on member function
-
-    std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
-    f           functions[4] = { &Harl::_debug, &Harl::_info, 
-                                    &Harl::_warning, &Harl::_error };
-
-    // (harl.*f)();  // calls specific ***instance*** of class function
-    // (harl->*f)();  // ***pointer to instance***, not instnace
-    // we could use (harlInstance.*functions[i])(); instead if we did this:
-    // Harl harlInstance = *this;  // Create a local instance
-    for (int i = 0; i < 4; i++)
-    {
-        if (level == levels[i])
-        {
-            (this->*functions[i])();
-            return ;
-        }
-    }
-    return ;
-}
-
 // ************************************************************************** //
 //                             Private Functions                              //
 // ************************************************************************** //
-void   Harl::_debug( void )
-{
-    std::cout << "Debugging..." << std::endl;
-    return ;
-}
 
-void   Harl::_info( void )
-{
-    std::cout << "Info..." << std::endl;
-    return ;
-}
-
-void   Harl::_warning( void )
-{
-    std::cout << "Warning..." << std::endl;
-    return ;
-}
-
-void   Harl::_error( void )
-{
-    std::cout << "Error..." << std::endl;
-    return ;
-}
+// ************************************************************************** //
+//                            Non-member Functions                            //
+// ************************************************************************** //

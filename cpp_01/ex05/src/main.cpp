@@ -20,16 +20,14 @@ int main(void) {
     while (true) {
         std::cout << "\nEnter level: ";
         if (!std::getline(std::cin, input)) {
-			std::cout << "\n EOF detected. Exiting program." << std::endl;
+			std::cout << "\nEOF detected. Exiting program." << std::endl;
 			std::exit(EXIT_SUCCESS);
 		}
-		
-
-        if (std::cin.eof()) {
-            std::freopen("/dev/tty", "r", stdin);
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            continue;
+        // if (std::cin.eof()) {
+        //     std::freopen("/dev/tty", "r", stdin);
+        //     std::cin.clear();
+        //     std::cin.ignore(10000, '\n');
+        //     continue;
         }
         if (input.empty()) // Ignore empty input
             continue;

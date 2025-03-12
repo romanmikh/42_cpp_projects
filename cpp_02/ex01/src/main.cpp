@@ -10,23 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
+#include "../inc/Fixed.hpp"
+#include "../inc/Utils.hpp"
 
-int main(void) {
+int main(void)
+{
+    Fixed       a;
+    Fixed const b(10);
+    Fixed const c(42.42f);
+    Fixed const d(b);
 
-	std::string str = "HI THIS IS BRAIN";
+    a = Fixed( 1234.4321f );
 
-	std::string* stringPTR = &str; // * -> the address of the string
-	std::string& stringREF = str;  // & -> ref=alias, same address in memory (same obj coneptually)
+    std::cout << "a is " << a << std::endl;
+    std::cout << "b is " << b << std::endl;
+    std::cout << "c is " << c << std::endl;
+    std::cout << "d is " << d << std::endl;
 
-	std::cout << "Address of the string: 			" << &str << std::endl;
-	std::cout << "Address of the string using pointer: 	" << stringPTR << std::endl;
-	std::cout << "Address of the string using reference:	" << &stringREF << std::endl;
-
-	std::cout << "String using variable: 		" << str << std::endl;
-	std::cout << "String using pointer: 		" << *stringPTR << std::endl;
-	std::cout << "String using reference: 	" << stringREF << std::endl;
-
-	return (0);
+    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+    
+    return 0;
 }
