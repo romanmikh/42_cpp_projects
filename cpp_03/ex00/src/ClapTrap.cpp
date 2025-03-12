@@ -30,26 +30,6 @@ ClapTrap::~ClapTrap(void){
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-std::string ClapTrap::getName(void) const {
-    return this->_name;
-}
-
-int         ClapTrap::getHitPts(void) const {
-    return this->_hitPts;
-}
-
-int         ClapTrap::getEnergyPts(void) const {
-    return this->_energyPts;
-}
-
-int         ClapTrap::getAttackDmg(void) const {
-    return this->_attackDmg;
-}
-
-void        ClapTrap::incrementEnergyPts(int amount) {
-    this->_energyPts += amount;
-}
-
 void        ClapTrap::decrementEnergyPts(int amount) {
     this->_energyPts -= amount;
 }
@@ -60,14 +40,6 @@ void        ClapTrap::incrementHitPts(int amount) {
 
 void        ClapTrap::decrementHitPts(int amount) {
     this->_hitPts -= amount;
-}
-void        ClapTrap::incrementAttackDmg(int amount) {
-    this->_attackDmg += amount;
-}
-
-
-void        ClapTrap::decrementAttackDmg(int amount) {
-    this->_attackDmg -= amount;
 }
 
 // ************************************************************************** //

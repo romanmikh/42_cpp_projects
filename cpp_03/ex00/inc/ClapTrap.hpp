@@ -49,22 +49,9 @@ public:
 
 
     // accessors
-    std::string         getName(void) const;
-    int                 getHitPts(void) const;
-    int                 getEnergyPts(void) const;
-    int                 getAttackDmg(void) const;
-
-    void                setName(std::string name);
-    void                setHitPts(int hitPts);
-    void                setEnergyPts(int energyPts);
-    void                setAttackDmg(int attackDmg);
-
-    void                incrementEnergyPts(int amount);
     void                decrementEnergyPts(int amount);
     void                incrementHitPts(int amount);
     void                decrementHitPts(int amount);
-    void                incrementAttackDmg(int amount);
-    void                decrementAttackDmg(int amount);
 
     // member functions
     void                attack(std::string const & target);
