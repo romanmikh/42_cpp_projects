@@ -44,12 +44,14 @@ public:
     // ********************************************************************** //
     Fixed(void);
     Fixed(const Fixed &other);
-    Fixed &operator = (const Fixed &other);
     ~Fixed(void);
 
     // specific to ex01
     Fixed(const int val);
     Fixed(const float val);
+
+    // operator overloads
+    Fixed &operator = (const Fixed &other);
 
     // accessors
     int                 getRawBits(void) const;
@@ -66,6 +68,6 @@ private:
 
 };
 
-std::ostream &operator << (std::ostream &out, Fixed const &fixed);
+std::ostream & operator << (std::ostream & out, Fixed const & fixed);
 
 #endif

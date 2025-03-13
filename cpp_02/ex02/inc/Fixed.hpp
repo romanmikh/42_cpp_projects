@@ -43,43 +43,43 @@ public:
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
     Fixed(void);
-    Fixed(const Fixed &other);
-    Fixed &operator = (const Fixed &other);
-    ~Fixed(void);
-
-    // specific to ex01
     Fixed(const int val);
     Fixed(const float val);
+    Fixed(const Fixed & other);
+    ~Fixed(void);
+
+    // operator overloads
+    Fixed & operator = (const Fixed & other); // modifies *this so no const at end
 
     // specific to ex02
-    bool operator > (const Fixed &other) const;
-    bool operator < (const Fixed &other) const;
-    bool operator >= (const Fixed &other) const;
-    bool operator <= (const Fixed &other) const;
-    bool operator == (const Fixed &other) const;
-    bool operator != (const Fixed &other) const;
+    bool operator > (const Fixed & other) const;
+    bool operator < (const Fixed & other) const;
+    bool operator >= (const Fixed & other) const;
+    bool operator <= (const Fixed & other) const;
+    bool operator == (const Fixed & other) const;
+    bool operator != (const Fixed & other) const;
 
-    Fixed operator + (const Fixed &other);
-    Fixed operator - (const Fixed &other);
-    Fixed operator * (const Fixed &other);
-    Fixed operator / (const Fixed &other);
+    Fixed operator + (const Fixed & other) const;   // no & bc don't modify *this
+    Fixed operator - (const Fixed & other) const;
+    Fixed operator * (const Fixed & other) const;
+    Fixed operator / (const Fixed & other) const;
 
-    Fixed &operator ++ (void);
-    Fixed &operator -- (void);
-    Fixed operator ++ (int);
-    Fixed operator -- (int);
+    Fixed & operator ++ (void); // prefix
+    Fixed & operator -- (void); // so decrements *this and returns ref to new obj
+    Fixed operator ++ (int);    // postfix
+    Fixed operator -- (int);    // so decrements *this and returns copy of old obj
 
-    static Fixed &min(Fixed &a, Fixed &b);
-    static Fixed &max(Fixed &a, Fixed &b);
+    static Fixed & min(Fixed & a, Fixed & b);
+    static Fixed & max(Fixed & a, Fixed & b);
 
-    static const Fixed &min(const Fixed &a, const Fixed &b);
-    static const Fixed &max(const Fixed &a, const Fixed &b);
+    static const Fixed & min(const Fixed & a, const Fixed & b);
+    static const Fixed & max(const Fixed & a, const Fixed & b);
 
     // accessors
     int                 getRawBits(void) const;
     void                setRawBits(int const raw);
 
-    // operators
+    // utility functions
     float               toFloat(void) const;
     int                 toInt(void) const;
 
@@ -90,6 +90,6 @@ private:
 
 };
 
-std::ostream &operator << (std::ostream &out, Fixed const &fixed);
+std::ostream & operator << (std::ostream & out, Fixed const & fixed);
 
 #endif

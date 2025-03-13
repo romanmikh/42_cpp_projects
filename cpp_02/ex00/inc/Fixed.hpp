@@ -26,7 +26,7 @@ public:
     //    - initialises object with defaut values. Allocates memory.          //  
     //                                                                        //
     // 2. Copy constructor                                                    //  
-    //    - allows 'MyClass a = b;'                                           //  
+    //    - allows 'MyClass b(a);'                                            //  
     //    - initialises copy of existing object. Allocates separate memory.   //  
     //    - const prevents modification of original object.                   //  
     //    - & passing parent by ref (by value would invoke copy constructor)  //  
@@ -42,10 +42,12 @@ public:
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
     Fixed(void);
-    Fixed(const Fixed &other);
-    Fixed &operator = (const Fixed &other);
+    Fixed(const Fixed & other);
     ~Fixed(void);
 
+    //operators 
+    Fixed & operator = (const Fixed & other);
+    
     // accessors
     int                 getRawBits(void) const;
     void                setRawBits(int const raw);
@@ -53,7 +55,6 @@ public:
 private:
 
     int                 _val;
-    static const int    _fracBits = 8;
 
 };
 
