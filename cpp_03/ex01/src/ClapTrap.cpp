@@ -26,6 +26,11 @@ ClapTrap::ClapTrap(std::string name)
     printStr("ClapTrap " + name + " created! :D", "G");
 }
 
+// FlagTrap::FlagTrap(const FlagTrap & other) : ClapTrap() {
+//     printStr("FlagTrap " + other.getName() + " copied! :D", "B");
+//     *this = other;
+// }
+
 ClapTrap::~ClapTrap(void){
     printStr("ClapTrap " + this->_name + " destroyed! D:", "G");
 }
