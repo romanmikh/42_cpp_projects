@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FlagTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_H
-# define SCAVTRAP_H
+#ifndef FlagTRAP_H
+# define FlagTRAP_H
 
 #include "../inc/ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class FlagTrap : public ClapTrap {
 
 public:
     // ********************************************************************** //  
@@ -40,20 +40,20 @@ public:
     // 4. Destructor                                                          //  
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
-    ScavTrap(std::string name);
-    ScavTrap(const ScavTrap &other);
-    ~ScavTrap(void);
+    FlagTrap(std::string name);
+    FlagTrap(const FlagTrap &other);
+    ~FlagTrap(void);
 
     /* operator overloads */
-    ScavTrap & operator = (const ScavTrap &other);
+    FlagTrap & operator = (const FlagTrap &other);
 
     /* member functions */
     void    attack(std::string const & target);
-    void    guardGate(void);
+    void    highFivesGuys(void);
     void    printStats(void) const;
 
 private:
-	ScavTrap(void);
+	FlagTrap(void);
 };
 
 /* non-member functions */

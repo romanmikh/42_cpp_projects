@@ -28,7 +28,7 @@ int main(void) {
 
     while (true) {
         scav.printStats();
-        std::cout << "Choose an action [attack, damage, repair, exit]: ";
+        std::cout << "> Choose an action [attack, damage, repair, guard, exit]: ";
         std::getline(std::cin, command);
         handleCtrlD();
 
@@ -46,10 +46,13 @@ int main(void) {
             amount = getUnsignedInt("Enter repair amount: ");
             scav.beRepaired(amount);
         }
+        else if (command == "guard") {
+            scav.guardGate();
+        }
         else if (command == "exit")
             break;
         else
-            printStr("Unknown command! Use: attack, damage, repair, or exit.", "P");
+            printStr("Unknown command! Use: attack, damage, repair, guard or exit.", "P");
     }
 
     return 0;

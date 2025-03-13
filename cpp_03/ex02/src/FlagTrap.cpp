@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   FlagTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,43 +11,39 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/ScavTrap.hpp"
+#include "../inc/FlagTrap.hpp"
 
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-ScavTrap::ScavTrap(void) : ClapTrap() {
+FlagTrap::FlagTrap(void) : ClapTrap() {
     setHitPts(100);
-    setEnergyPts(50);
-    setAttackDmg(20);
-    printStr("ScavTrap Tails created! :D", "C");
+    setEnergyPts(100);
+    setAttackDmg(30);
+    printStr("FlagTrap Tails created! :D", "B");
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-    printStr("ScavTrap " + name + " created! :D", "C");
+FlagTrap::FlagTrap(std::string name) : ClapTrap(name) {
+    printStr("FlagTrap " + name + " created! :D", "B");
     setHitPts(100);
-    setEnergyPts(50);
-    setAttackDmg(20);
+    setEnergyPts(100);
+    setAttackDmg(30);
 }
 
-ScavTrap::ScavTrap(const ScavTrap & other) : ClapTrap() {
-    printStr("ScavTrap " + other.getName() + " copied! :D", "P");
+FlagTrap::FlagTrap(const FlagTrap & other) : ClapTrap() {
+    printStr("FlagTrap " + other.getName() + " copied! :D", "B");
     *this = other;
 }
 
-ScavTrap::~ScavTrap(void){
-    printStr("ScavTrap " + this->getName() + " destroyed! D:", "C");
+FlagTrap::~FlagTrap(void){
+    printStr("FlagTrap " + this->getName() + " destroyed! D:", "B");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
-ScavTrap & ScavTrap::operator = (const ScavTrap & other) {
+FlagTrap & FlagTrap::operator = (const FlagTrap & other) {
     if (this != &other) {
-        // this->_name = other.getName();
-        // this->_hitPts = other.getHitPts();
-        // this->_energyPts = other.getEnergyPts();
-        // this->_attackDmg = other.getAttackDmg();
         setName(other.getName());
         setHitPts(other.getHitPts());
         setEnergyPts(other.getEnergyPts());
@@ -63,27 +59,27 @@ ScavTrap & ScavTrap::operator = (const ScavTrap & other) {
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void    ScavTrap::attack(std::string const &target) {
+void    FlagTrap::attack(std::string const &target) {
     if (this->getHitPts() < 1) {
-        printStr("Scav " + this->getName() + " is already dead! 💀", "R");
+        printStr("Flag " + this->getName() + " is already dead! 💀", "R");
         return ;
     }
     if (this->getEnergyPts() < 1) {
-        printStr("Scav " + this->getName() + " is out of energy! ⛽", "R");
+        printStr("Flag " + this->getName() + " is out of energy! ⛽", "R");
         return ;
     }
-    std::cout << "Scav " << this->getName() << " karate chops " << target 
+    std::cout << "Flag " << this->getName() << " karate chops " << target 
                 << " in the face, causing " 
                 << this->getAttackDmg() << " points of damage! 🤯" << std::endl;
     this->decrementEnergyPts(1);
 }
 
-void    ScavTrap::guardGate(void) {
-    printStr("Scav " + this->getName() + " enters Gate keeper mode! 🚧", "G");
+void    FlagTrap::highFivesGuys(void) {
+    printStr("Flag " + this->getName() + " high fives everyone! 🙌", "G");
 }
 
-void                ScavTrap::printStats(void) const {
-    printStr("------------------------ ScavStats ------------------------", "B");
+void                FlagTrap::printStats(void) const {
+    printStr("------------------------ FlagStats ------------------------", "B");
     std::cout << "  Name:             " << this->getName() << std::endl; 
     std::cout << "  Hit Points:       " << this->getHitPts() << std::endl;
     std::cout << "  Energy Points:    " << this->getEnergyPts() << std::endl;

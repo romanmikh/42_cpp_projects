@@ -18,16 +18,16 @@
 // ************************************************************************** //
 ClapTrap::ClapTrap(void) 
                 : _name("Sonic"), _hitPts(10),  _energyPts(10), _attackDmg(0) {
-    printStr("ClapTrap Sonic created! :D", "G");
+    printStr("ClapTrap Sonic created! :D", "Y");
 }
 
 ClapTrap::ClapTrap(std::string name) 
                     : _name(name), _hitPts(10),  _energyPts(10), _attackDmg(0) {
-    printStr("ClapTrap " + name + " created! :D", "G");
+    printStr("ClapTrap " + name + " created! :D", "Y");
 }
 
 ClapTrap::~ClapTrap(void){
-    printStr("ClapTrap " + this->_name + " destroyed! D:", "G");
+    printStr("ClapTrap " + this->_name + " destroyed! D:", "Y");
 }
 
 // ************************************************************************** //
