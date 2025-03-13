@@ -43,7 +43,7 @@ public:
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
     Fixed(void);
-    Fixed(const Fixed &other);
+    Fixed(const Fixed & other);
     ~Fixed(void);
 
     // specific to ex01
@@ -51,7 +51,7 @@ public:
     Fixed(const float val);
 
     // operator overloads
-    Fixed &operator = (const Fixed &other);
+    Fixed &operator = (const Fixed & other);
 
     // accessors
     int                 getRawBits(void) const;

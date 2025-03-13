@@ -43,23 +43,31 @@ public:
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
     ClapTrap(std::string name);
-    ClapTrap(const ClapTrap &other);
-    ClapTrap &operator = (const ClapTrap &other);
+    ClapTrap(const ClapTrap & other);
     ~ClapTrap(void);
 
+    /* operator overloads */
+    ClapTrap & operator = (const ClapTrap & other);
 
-    // accessors
+    /* accessors */
+    std::string         getName(void) const;
+    unsigned int        getHitPts(void) const;
+    unsigned int        getEnergyPts(void) const;
+    unsigned int        getAttackDmg(void) const;
+    
     void                decrementEnergyPts(int amount);
     void                incrementHitPts(int amount);
     void                decrementHitPts(int amount);
 
-    // member functions
+    /* member functions */
     void                attack(std::string const & target);
     void                takeDamage(unsigned int amount);
     void                beRepaired(unsigned int amount);
     void                printStats(void) const;
 
 private:
+
+    ClapTrap(void);
     std::string         _name;
     unsigned int        _hitPts;
     unsigned int        _energyPts;
@@ -67,7 +75,6 @@ private:
 
 };
 
-// non-member functions
-
+/* non-member functions */
 
 #endif

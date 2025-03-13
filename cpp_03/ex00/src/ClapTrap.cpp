@@ -16,6 +16,12 @@
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
+ClapTrap::ClapTrap(void) 
+                : _name("Sonic"), _hitPts(10),  _energyPts(10), _attackDmg(0) {
+    printStr("ClapTrap Sonic created! :D", "G");
+    return ;
+}
+
 ClapTrap::ClapTrap(std::string name) 
                     : _name(name), _hitPts(10),  _energyPts(10), _attackDmg(0) {
     printStr("ClapTrap " + name + " created! :D", "G");
@@ -23,29 +29,58 @@ ClapTrap::ClapTrap(std::string name)
 }
 
 ClapTrap::~ClapTrap(void){
-    printStr("ClapTrap " + this->_name + " destroyed! D:", "R");
+    printStr("ClapTrap " + this->_name + " destroyed! D:", "G");
     return ;
+}
+
+// ************************************************************************** //
+//                           Operator Overloads                               //
+// ************************************************************************** //
+ClapTrap & ClapTrap::operator = (const ClapTrap & other) {
+    if (this != &other) {
+        this -> _name = other.getName();
+        this -> _hitPts = other.getHitPts();
+        this -> _energyPts = other.getEnergyPts();
+        this -> _attackDmg = other.getAttackDmg();
+    }
+    return *this;
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-void        ClapTrap::decrementEnergyPts(int amount) {
+std::string ClapTrap::getName(void) const {
+    return this->_name;
+}
+
+unsigned int ClapTrap::getHitPts(void) const {
+    return this->_hitPts;
+}
+
+unsigned int ClapTrap::getEnergyPts(void) const {
+    return this->_energyPts;
+}
+
+unsigned int ClapTrap::getAttackDmg(void) const {
+    return this->_attackDmg;
+}
+
+void    ClapTrap::decrementEnergyPts(int amount) {
     this->_energyPts -= amount;
 }
 
-void        ClapTrap::incrementHitPts(int amount) {
+void    ClapTrap::incrementHitPts(int amount) {
     this->_hitPts += amount;
 }
 
-void        ClapTrap::decrementHitPts(int amount) {
+void    ClapTrap::decrementHitPts(int amount) {
     this->_hitPts -= amount;
 }
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void                ClapTrap::attack(std::string const &target) {
+void    ClapTrap::attack(std::string const & target) {
     if (this->_hitPts < 1) {
         printStr(this->_name + " is already dead! 💀", "R");
         return ;
@@ -59,7 +94,7 @@ void                ClapTrap::attack(std::string const &target) {
     decrementEnergyPts(1);
 }
 
-void                ClapTrap::takeDamage(unsigned int amount) {
+void    ClapTrap::takeDamage(unsigned int amount) {
     if (this->_hitPts < 1) {
         printStr(this->_name + " is already dead! 💀", "R");
         return ;
@@ -71,7 +106,7 @@ void                ClapTrap::takeDamage(unsigned int amount) {
     decrementHitPts(amount);
 }
 
-void                ClapTrap::beRepaired(unsigned int amount) {
+void    ClapTrap::beRepaired(unsigned int amount) {
     if (this->_hitPts < 1) {
         printStr(this->_name + " is already dead! 💀", "R");
         return ;
@@ -86,7 +121,7 @@ void                ClapTrap::beRepaired(unsigned int amount) {
     decrementEnergyPts(1);
 }
 
-void                ClapTrap::printStats(void) const{
+void    ClapTrap::printStats(void) const {
     printStr("------------------------ ClapStats ------------------------", "Y");
     std::cout << "  Name:             " << this->_name << std::endl; 
     std::cout << "  Hit Points:       " << this->_hitPts << std::endl;
