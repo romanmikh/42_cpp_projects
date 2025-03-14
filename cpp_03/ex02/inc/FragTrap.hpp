@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FlagTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FlagTRAP_H
-# define FlagTRAP_H
+#ifndef FragTRAP_H
+# define FragTRAP_H
 
 #include "../inc/ClapTrap.hpp"
 
-class FlagTrap : public ClapTrap {
+class FragTrap : public ClapTrap {
 
 public:
     // ********************************************************************** //  
@@ -40,20 +40,19 @@ public:
     // 4. Destructor                                                          //  
     //    - releases resources when object goes out of scope, prevents leaks. //  
     // ********************************************************************** //
-    FlagTrap(std::string name);
-    FlagTrap(const FlagTrap &other);
-    ~FlagTrap(void);
+    FragTrap(std::string name);
+    FragTrap(const FragTrap &other);
+    ~FragTrap(void);
 
     /* operator overloads */
-    FlagTrap & operator = (const FlagTrap &other);
+    FragTrap & operator = (const FragTrap &other);
 
     /* member functions */
-    void    attack(std::string const & target);
     void    highFivesGuys(void);
     void    printStats(void) const;
 
 private:
-	FlagTrap(void);
+	FragTrap(void);
 };
 
 /* non-member functions */

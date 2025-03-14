@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FlagTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,38 +11,38 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/FlagTrap.hpp"
+#include "../inc/FragTrap.hpp"
 
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-FlagTrap::FlagTrap(void) : ClapTrap() {
+FragTrap::FragTrap(void) : ClapTrap() {
     setHitPts(100);
     setEnergyPts(100);
     setAttackDmg(30);
-    printStr("FlagTrap Tails created! :D", "B");
+    printStr("FragTrap Tails created! :D", "B");
 }
 
-FlagTrap::FlagTrap(std::string name) : ClapTrap(name) {
-    printStr("FlagTrap " + name + " created! :D", "B");
+FragTrap::FragTrap(std::string name) : ClapTrap(name) {
+    printStr("FragTrap " + name + " created! :D", "B");
     setHitPts(100);
     setEnergyPts(100);
     setAttackDmg(30);
 }
 
-FlagTrap::FlagTrap(const FlagTrap & other) : ClapTrap() {
-    printStr("FlagTrap " + other.getName() + " copied! :D", "B");
+FragTrap::FragTrap(const FragTrap & other) : ClapTrap() {
+    printStr("FragTrap " + other.getName() + " copied! :D", "B");
     *this = other;
 }
 
-FlagTrap::~FlagTrap(void){
-    printStr("FlagTrap " + this->getName() + " destroyed! D:", "B");
+FragTrap::~FragTrap(void){
+    printStr("FragTrap " + this->getName() + " destroyed! D:", "B");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
-FlagTrap & FlagTrap::operator = (const FlagTrap & other) {
+FragTrap & FragTrap::operator = (const FragTrap & other) {
     if (this != &other) {
         setName(other.getName());
         setHitPts(other.getHitPts());
@@ -59,27 +59,12 @@ FlagTrap & FlagTrap::operator = (const FlagTrap & other) {
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void    FlagTrap::attack(std::string const &target) {
-    if (this->getHitPts() < 1) {
-        printStr("Flag " + this->getName() + " is already dead! 💀", "R");
-        return ;
-    }
-    if (this->getEnergyPts() < 1) {
-        printStr("Flag " + this->getName() + " is out of energy! ⛽", "R");
-        return ;
-    }
-    std::cout << "Flag " << this->getName() << " karate chops " << target 
-                << " in the face, causing " 
-                << this->getAttackDmg() << " points of damage! 🤯" << std::endl;
-    this->decrementEnergyPts(1);
+void    FragTrap::highFivesGuys(void) {
+    printStr("Frag " + this->getName() + " high fives everyone! 🙌", "G");
 }
 
-void    FlagTrap::highFivesGuys(void) {
-    printStr("Flag " + this->getName() + " high fives everyone! 🙌", "G");
-}
-
-void                FlagTrap::printStats(void) const {
-    printStr("------------------------ FlagStats ------------------------", "B");
+void                FragTrap::printStats(void) const {
+    printStr("------------------------ FragStats ------------------------", "B");
     std::cout << "  Name:             " << this->getName() << std::endl; 
     std::cout << "  Hit Points:       " << this->getHitPts() << std::endl;
     std::cout << "  Energy Points:    " << this->getEnergyPts() << std::endl;
