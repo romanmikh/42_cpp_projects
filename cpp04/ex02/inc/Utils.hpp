@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,32 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include "../inc/Animal.hpp"
-#include "../inc/Brain.hpp"
+#ifndef UTILS_HPP
+#define UTILS_HPP
 
-class Cat : public Animal {
-    
-    public:
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
+#include <csignal>
+#include <sstream>
 
-        /* construcotrs & destructors */
-        Cat(void);
-        Cat(const Cat &other);
-        ~Cat(void);
+void	        handleCtrlD(void);
+unsigned int    getUnsignedInt(const std::string& prompt);
+void            printStr(const std::string& text, const std::string& colour = "RESET");
 
-        /* operator overloads */
-        Cat & operator = (const Cat &other);
-        
-        /* accessors */
-        Brain*      getBrain(void) const;
-
-        /* member functions */
-        void        makeSound(void) const;
-
-    protected:
-
-    private:
-        Brain*   _brain;
-};
-
-/* non-member functions */
+#endif

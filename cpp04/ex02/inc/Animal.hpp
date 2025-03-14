@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,31 +11,30 @@
 /* ************************************************************************** */
 
 #pragma once
-#include "../inc/Animal.hpp"
-#include "../inc/Brain.hpp"
+#include <string>
+#include <iostream>
+#include <cmath>
 
-class Cat : public Animal {
+class Animal {
     
     public:
 
         /* construcotrs & destructors */
-        Cat(void);
-        Cat(const Cat &other);
-        ~Cat(void);
+        Animal(void);
+        Animal(const Animal &other);
+        virtual     ~Animal(void);  // virtual destructor in base class
 
         /* operator overloads */
-        Cat & operator = (const Cat &other);
+        Animal & operator = (const Animal &other);
         
         /* accessors */
-        Brain*      getBrain(void) const;
+        std::string     getType(void) const;
+        void            setType(std::string type);
 
         /* member functions */
-        void        makeSound(void) const;
-
+        virtual void    makeSound(void) const;  // enables polymorphism
+        
     protected:
 
-    private:
-        Brain*   _brain;
+        std::string     _type;
 };
-
-/* non-member functions */

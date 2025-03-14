@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Animal.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,57 +11,51 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/Cat.hpp"
+#include "../inc/Animal.hpp"
 
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-Cat::Cat(void) : Animal(), _brain(new Brain()) {
-    setType("Cat 🐱");
-    printStr(getType() + " created! :D", "P");
+Animal::Animal(void) {
+    setType("Chimera 👾");
+    printStr("Animal created! :D", "G");
 }
 
-Cat::Cat(const Cat & other) : Animal(), _brain(NULL) {
-    printStr(getType() + " copied (deeply)! :D", "P");
-    if (_brain) {
-        delete _brain;
-    }
-    if (other._brain) {
-        _brain = new Brain(*other._brain);
-    }
+Animal::Animal(const Animal & other) {
+    printStr("Animal copied! :D", "G");
+    *this = other;
 }
 
-Cat::~Cat(void){
-    delete this->_brain;
-    printStr(getType() + " destroyed! D:", "P");
+Animal::~Animal(void){
+    printStr("Animal destroyed! D:\n", "G");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
-Cat & Cat::operator = (const Cat & other) {
-    if (this != &other) {
+Animal & Animal::operator = (const Animal & other) {
+    if (this != &other)
         this->_type = other.getType();
-        delete this->_brain;
-        this->_brain = new Brain(*other._brain);
-    }
-    printStr(getType() + " brain assigned (deeply)! :D", "B");
     return *this;
 }
+
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-Brain*     Cat::getBrain(void) const {
-    return this->_brain;
+std::string Animal::getType(void) const {
+    return _type;
+}
+
+void        Animal::setType(std::string type) {
+    this->_type = type;
 }
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-void       Cat::makeSound(void) const {
-    printStr(getType() + " says: *miau miau*", "P");
+void        Animal::makeSound(void) const {
+    printStr(getType() + " says: *skibbidi*", "G");
 }
-
 // ************************************************************************** //
 //                             Private Functions                              //
 // ************************************************************************** //

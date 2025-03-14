@@ -22,7 +22,7 @@ class WrongAnimal {
         /* construcotrs & destructors */
         WrongAnimal(void);
         WrongAnimal(const WrongAnimal &other);
-        ~WrongAnimal(void);  // virtual destructor in base class
+        virtual ~WrongAnimal(void);  // virtual destructor in base class
 
         /* operator overloads */
         WrongAnimal & operator = (const WrongAnimal &other);
@@ -32,7 +32,7 @@ class WrongAnimal {
         void            setType(std::string type);
 
         /* member functions */
-        void    makeSound(void) const;  // enables polymorphism
+        void    makeSound(void) const;  // virtual would enable polymorphism
         
     protected:
 

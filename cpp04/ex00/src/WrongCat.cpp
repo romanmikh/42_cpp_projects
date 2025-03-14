@@ -17,7 +17,7 @@
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
 WrongCat::WrongCat(void) : WrongAnimal() {
-    setType("WrongCat 🐍");
+    setType("WrongCat 🐎");
     printStr(getType() + " created! :D", "P");
 }
 
@@ -47,7 +47,7 @@ WrongCat & WrongCat::operator = (const WrongCat & other) {
 //                             Public Functions                               //
 // ************************************************************************** //
 void       WrongCat::makeSound(void) const {
-    printStr(getType() + " says: *miau miau*", "P");
+    printStr(getType() + " says: *neeeeeigh*", "P");
 }
 
 // ************************************************************************** //

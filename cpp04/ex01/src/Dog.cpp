@@ -16,38 +16,51 @@
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-Dog::Dog(void) : Animal() {
+Dog::Dog(void) : Animal(), _brain(new Brain()) {
     setType("Dog 🐶");
     printStr(getType() + " created! :D", "B");
 }
 
-Dog::Dog(const Dog & other) {
-    printStr("Dog copied! :D", "B");
-    *this = other;
+Dog::Dog(const Dog & other) : Animal(), _brain(NULL) {
+    printStr(getType() + " copied (deeply)! :D", "B");
+    if (_brain) {
+        delete _brain;
+    }
+    if (other._brain) {
+        _brain = new Brain(*other._brain);
+    }
 }
 
 Dog::~Dog(void){
-    printStr("Dog destroyed! D:", "B");
+    delete this->_brain;
+    printStr(getType() + " destroyed! D:", "B");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
 Dog & Dog::operator = (const Dog & other) {
-    if (this != &other)
+    if (this != &other) {
         this->_type = other.getType();
+        delete this->_brain;
+        this->_brain = new Brain(*other._brain);
+    }
+    printStr(getType() + " brain assigned (deeply)! :D", "B");
     return *this;
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
+Brain*     Dog::getBrain(void) const {
+    return this->_brain;
+}
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
 void       Dog::makeSound(void) const {
-    printStr(getType() + " says: *gav gav*", "B");
+    printStr(getType() + " says: *miau miau*", "B");
 }
 
 // ************************************************************************** //

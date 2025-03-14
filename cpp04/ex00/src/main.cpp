@@ -57,6 +57,16 @@ int main(void)
 
 //     delete meta;
 //     delete i;
+//     std::cout << std::endl << std::endl;
+
+//     printStr("BUT if we instantiate WrongCat without animal:", "R");
+
+//     const WrongCat* j = new WrongCat();
+//     j->makeSound();
+//     printStr("it doesn't inherit Animal's makeSound()", "R");
+//     std::cout << std::endl;
+
+//     delete j;
 
 //     return 0;
 // }
