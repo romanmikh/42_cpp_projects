@@ -28,8 +28,8 @@ class Brain {
         Brain & operator = (const Brain &other);
         
         /* accessors */
-        const std::string&     getIdea(int index) const;
-        void            setIdea(std::string idea, int index);
+        const std::string&      getIdea(int index) const;
+        void                    setIdea(std::string idea, int index);
 
         /* member functions */
         

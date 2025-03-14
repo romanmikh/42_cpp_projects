@@ -23,6 +23,7 @@ class Animal {
         Animal(void);
         Animal(const Animal &other);
         virtual     ~Animal(void);  // virtual destructor in base class
+        // allows destruction of Animal objects via other classes' destructors
 
         /* operator overloads */
         Animal & operator = (const Animal &other);
@@ -32,7 +33,15 @@ class Animal {
         void            setType(std::string type);
 
         /* member functions */
-        virtual void    makeSound(void) const;  // enables polymorphism
+        virtual void    makeSound(void) const = 0;  // = 0 makes this a pure virtual function
+        /* 
+        - error: unimplemented pure virtual method 'makeSound' in 'Animal'
+        - Animal is an abstract class, so it can't be instantiated
+        - it can only be used as a base class for other classes
+        - so derived classes like Dog and Cat work just fine
+        - because they implement their own makeSound() methods
+        */ 
+
         
     protected:
 

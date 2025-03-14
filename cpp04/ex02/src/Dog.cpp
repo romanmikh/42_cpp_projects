@@ -19,18 +19,21 @@
 Dog::Dog(void) : Animal(), _brain(new Brain()) {
     setType("Dog 🐶");
     printStr(getType() + " created! :D", "B");
-    printStr(getType() + " grew a brain! 🧠\n", "B");
 }
 
-Dog::Dog(const Dog & other) : Animal(), _brain(new Brain(*other._brain)) {
-    printStr(getType() + " copied! :D", "B");
-    *this = other;
+Dog::Dog(const Dog & other) : Animal(), _brain(NULL) {
+    printStr(getType() + " copied (deeply)! :D", "B");
+    if (_brain) {
+        delete _brain;
+    }
+    if (other._brain) {
+        _brain = new Brain(*other._brain);
+    }
 }
 
 Dog::~Dog(void){
     delete this->_brain;
-    printStr(getType() + " destroyed its own brain 🧠", "P");
-    printStr(getType() + " destroyed! D:", "R");
+    printStr(getType() + " destroyed! D:", "B");
 }
 
 // ************************************************************************** //
@@ -42,6 +45,7 @@ Dog & Dog::operator = (const Dog & other) {
         delete this->_brain;
         this->_brain = new Brain(*other._brain);
     }
+    printStr(getType() + " brain assigned (deeply)! :D", "B");
     return *this;
 }
 
@@ -56,7 +60,7 @@ Brain*     Dog::getBrain(void) const {
 //                             Public Functions                               //
 // ************************************************************************** //
 void       Dog::makeSound(void) const {
-    printStr(getType() + " says: *miau miau*", "B");
+    printStr(getType() + " says: *gav gav*", "B");
 }
 
 // ************************************************************************** //

@@ -30,12 +30,12 @@ class Cat : public Animal {
         Brain*      getBrain(void) const;
 
         /* member functions */
-        void        makeSound(void) const;
-
+        
     protected:
 
     private:
         Brain*   _brain;
+        void        makeSound(void) const;
 };
 
 /* non-member functions */

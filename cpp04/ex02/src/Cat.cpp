@@ -18,19 +18,22 @@
 // ************************************************************************** //
 Cat::Cat(void) : Animal(), _brain(new Brain()) {
     setType("Cat 🐱");
-    printStr(getType() + " created! :D", "R");
-    printStr(getType() + " grew a brain! 🧠\n", "P");
+    printStr(getType() + " created! :D", "P");
 }
 
-Cat::Cat(const Cat & other) : Animal(), _brain(new Brain(*other._brain)) {
-    printStr(getType() + " copied! :D", "R");
-    *this = other;
+Cat::Cat(const Cat & other) : Animal(), _brain(NULL) {
+    printStr(getType() + " copied (deeply)! :D", "P");
+    if (_brain) {
+        delete _brain;
+    }
+    if (other._brain) {
+        _brain = new Brain(*other._brain);
+    }
 }
 
 Cat::~Cat(void){
     delete this->_brain;
-    printStr(getType() + " destroyed its own brain 🧠", "P");
-    printStr(getType() + " destroyed! D:", "R");
+    printStr(getType() + " destroyed! D:", "P");
 }
 
 // ************************************************************************** //
@@ -42,6 +45,7 @@ Cat & Cat::operator = (const Cat & other) {
         delete this->_brain;
         this->_brain = new Brain(*other._brain);
     }
+    printStr(getType() + " brain assigned (deeply)! :D", "B");
     return *this;
 }
 // ************************************************************************** //
@@ -55,7 +59,7 @@ Brain*     Cat::getBrain(void) const {
 //                             Public Functions                               //
 // ************************************************************************** //
 void       Cat::makeSound(void) const {
-    printStr(getType() + " says: *miau miau*", "R");
+    printStr(getType() + " says: *miau miau*", "P");
 }
 
 // ************************************************************************** //

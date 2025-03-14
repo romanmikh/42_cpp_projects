@@ -23,6 +23,7 @@ class Animal {
         Animal(void);
         Animal(const Animal &other);
         virtual     ~Animal(void);  // virtual destructor in base class
+        // allows destruction of Animal objects via other classes' destructors
 
         /* operator overloads */
         Animal & operator = (const Animal &other);

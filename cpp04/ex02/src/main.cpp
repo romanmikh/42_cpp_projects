@@ -18,6 +18,15 @@
 int main(void)
 {
     
+    // Animal* animal = new Animal();  
+    /* 
+        - error: unimplemented pure virtual method 'makeSound' in 'Animal'
+        - Animal is an abstract class, so it can't be instantiated
+        - it can only be used as a base class for other classes
+        - so derived classes like Dog and Cat work just fine
+        - because they implement their own makeSound() methods
+    */ 
+
     int numAnimals = 4;
 
     printStr("---------------------------------------------------------------");
@@ -48,11 +57,22 @@ int main(void)
     for (int i = 0; i < maxCats; i++) {
         cats[i]->getBrain()->setIdea("I am a cat...", 0);
         cats[i]->getBrain()->setIdea("...I am still a cat", 1);
-        printStr(cats[i]->getBrain()->getIdea(0));
-        printStr(cats[i]->getBrain()->getIdea(1));
-        std::cout << "I'm cat #" << i << ". Address of my first idea: " << 
-                    &cats[i]->getBrain()->getIdea(0) << std::endl << std::endl;
+        std::cout << "Idea #" << 0 << ": " << cats[i]->getBrain()->getIdea(0) << std::endl;
+        std::cout << "Idea #" << 1 << ": " << cats[i]->getBrain()->getIdea(1) << std::endl;
+        std::cout << "I'm cat #" << i << ". Address of my 0th idea: " << &cats[i]->getBrain()->getIdea(0) << std::endl << std::endl;
     }
+
+    Cat kit;
+    kit = *cats[0];
+    kit.getBrain()->setIdea("I am a kitten...", 0);
+    std::cout << "Idea #0: " << kit.getBrain()->getIdea(0) << std::endl;
+    std::cout << "Address of kit's 0th idea: " << &kit.getBrain()->getIdea(0) << std::endl << std::endl;
+
+    std::cout << &cats[0]->getBrain()->getIdea(0) << 
+    ((&cats[0]->getBrain()->getIdea(0)) == &cats[1]->getBrain()->getIdea(0) ? " = " : " != ") 
+    << &cats[1]->getBrain()->getIdea(0) <<
+    ((&cats[1]->getBrain()->getIdea(0)) == &kit.getBrain()->getIdea(0) ? " = " : " != ") 
+    << &kit.getBrain()->getIdea(0) << " => deep copies created!" << std::endl << std::endl;
 
     printStr("---------------------------------------------------------------");
     printStr("--------------------- Testing Dog Brains ----------------------");
@@ -67,11 +87,23 @@ int main(void)
     for (int i = 0; i < maxDogs; i++) {
         dogs[i]->getBrain()->setIdea("I am a dog...", 0);
         dogs[i]->getBrain()->setIdea("...I am still a dog", 1);
-        printStr(dogs[i]->getBrain()->getIdea(0));
-        printStr(dogs[i]->getBrain()->getIdea(1));
-        std::cout << "I'm dog #" << i << ". Address of my first idea: " << 
-                    &dogs[i]->getBrain()->getIdea(0) << std::endl << std::endl;
+        std::cout << "Idea #" << 0 << ": " << dogs[i]->getBrain()->getIdea(0) << std::endl;
+        std::cout << "Idea #" << 1 << ": " << dogs[i]->getBrain()->getIdea(1) << std::endl;
+        std::cout << "I'm dog #" << i << ". Address of my 0th idea: " << &dogs[i]->getBrain()->getIdea(0) << std::endl << std::endl;
     }
+
+    Dog pup;
+    pup = *dogs[0];
+    pup.getBrain()->setIdea("I am a pup...", 0);
+    std::cout << "Idea #0: " << pup.getBrain()->getIdea(0) << std::endl;
+    std::cout << "Address of pup's 0th idea: " << 
+                    &pup.getBrain()->getIdea(0) << std::endl << std::endl;
+
+    std::cout << &dogs[0]->getBrain()->getIdea(0) << 
+    ((&dogs[0]->getBrain()->getIdea(0)) == &dogs[1]->getBrain()->getIdea(0) ? " = " : " != ") 
+    << &dogs[1]->getBrain()->getIdea(0) <<
+    ((&dogs[1]->getBrain()->getIdea(0)) == &pup.getBrain()->getIdea(0) ? " = " : " != ") 
+    << &pup.getBrain()->getIdea(0) << " => deep copies created!" << std::endl << std::endl;
 
     printStr("---------------------------------------------------------------");
     printStr("---------------------- Killing Animals ------------------------");
@@ -85,6 +117,9 @@ int main(void)
 
     for (int i = 0; i < maxDogs; i++)
         delete dogs[i];
+
+    // delete kit;  // don't need these bc assigned by overloaded = operator
+    // delete pup;  // they're wiped when they go out of scope (end of main)
 
     return 0;
 }

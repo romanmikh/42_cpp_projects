@@ -60,7 +60,7 @@ Brain*     Dog::getBrain(void) const {
 //                             Public Functions                               //
 // ************************************************************************** //
 void       Dog::makeSound(void) const {
-    printStr(getType() + " says: *miau miau*", "B");
+    printStr(getType() + " says: *gav gav*", "B");
 }
 
 // ************************************************************************** //
