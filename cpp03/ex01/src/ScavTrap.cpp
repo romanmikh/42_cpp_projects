@@ -44,10 +44,6 @@ ScavTrap::~ScavTrap(void){
 // ************************************************************************** //
 ScavTrap & ScavTrap::operator = (const ScavTrap & other) {
     if (this != &other) {
-        // this->_name = other.getName();
-        // this->_hitPts = other.getHitPts();
-        // this->_energyPts = other.getEnergyPts();
-        // this->_attackDmg = other.getAttackDmg();
         setName(other.getName());
         setHitPts(other.getHitPts());
         setEnergyPts(other.getEnergyPts());

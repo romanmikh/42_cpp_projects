@@ -61,15 +61,15 @@ public:
     void                setEnergyPts(unsigned int value);
     void                setAttackDmg(unsigned int value);
 
-    void                decrementEnergyPts(int amount);
-    void                incrementHitPts(int amount);
-    void                decrementHitPts(int amount);
-
     /* member functions */
     void                attack(std::string const & target);
     void                takeDamage(unsigned int amount);
     void                beRepaired(unsigned int amount);
     void                printStats(void) const;
+
+    void                decrementEnergyPts(int amount);
+    void                incrementHitPts(int amount);
+    void                decrementHitPts(int amount);
 
 protected:
 
@@ -80,7 +80,6 @@ protected:
 
 };
 
-// non-member functions
-
+/* non-member functions */
 
 #endif
