@@ -24,7 +24,7 @@ int main(void)
     printStr("------------------- Testing Animals Array ---------------------");
     printStr("---------------------------------------------------------------");
 
-    Animal* animals[numAnimals];
+    const Animal* animals[numAnimals];
 
     for (int i = 0; i < numAnimals / 2; i++)
         animals[i] = new Cat();
@@ -40,7 +40,7 @@ int main(void)
     printStr("---------------------------------------------------------------");
 
     int maxCats = numAnimals / 2;
-    Cat* cats[maxCats];
+    const Cat* cats[maxCats];
 
     for (int i = 0; i < maxCats; i++)
         cats[i] = new Cat();

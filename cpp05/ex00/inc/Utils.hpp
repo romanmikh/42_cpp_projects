@@ -18,6 +18,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <csignal>
+#include <sstream>
 #include <cmath>
 
 void	        handleCtrlD(void);
