@@ -13,8 +13,30 @@
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/Utils.hpp"
 
+void    illegalForms(std::string name, int gradeSign, int gradeExec) {
+    try {
+        std::cout << name << " with sign grade: " << gradeSign 
+                          << " and exec grade: " << gradeExec << std::endl;
+        Form f2 = Form(name, gradeSign, gradeExec);
+    }
+    catch (std::exception & e) {
+        std::cerr << e.what() << std::endl << std::endl;
+    }
+}
+
 int main(void)
 {
+
+    illegalForms("SignTooHighForm", 151, 30);
+    illegalForms("ExecTooHighForm", 30, 151);  
+    illegalForms("SignTooLowForm", -420, 42);  
+    illegalForms("ExecTooLowForm", 69, 0);  ;
+
+    printStr("----------------------------------------------------------", "Y");
+    printStr("------------------- Next Form's Turn ---------------------", "Y");
+    printStr("----------------------------------------------------------", "Y");    
+    std::cout << std::endl;
+
     try {
         Bureaucrat b2("🔥 Prince Zuko");
         std::cout << b2 << std::endl;
@@ -26,7 +48,7 @@ int main(void)
         std::cout << std::endl;
 
         b2.incrementGrade(148);
-        std::cout << std::endl;
+        std::cout << b2 << std::endl;
 
         b2.signForm(f1);
         std::cout << std::endl;

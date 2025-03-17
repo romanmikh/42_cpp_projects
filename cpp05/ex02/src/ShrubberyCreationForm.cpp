@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                            :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/Form.hpp"
+#include "../inc/ShrubberyCreationForm.hpp"
 
 #define RESET	"\e[0m"
 #define RED		"\e[31m"
@@ -24,93 +24,83 @@
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-Form::Form(void) 
-                    : _name("MarriageForm"), 
-                      _signed(false), 
-                      _gradeSign(100), 
-                      _gradeExec(100) {
-    printStr("Form default created! :D", "Y");
+ShrubberyCreationForm::ShrubberyCreationForm(void)
+                    : AForm("ShrubberyCreationForm", 145, 137), 
+                      _target("Home ") {
+    printStr("ShrubberyCreationForm default created! :D", "Y");
 }
 
-Form::Form(const std::string& name) 
-                    : _name(name), 
-                      _signed(false), 
-                      _gradeSign(100), 
-                      _gradeExec(100) {
-    printStr(name + " created using a name! :D", "Y");
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+                    : AForm("ShrubberyCreationForm", 145, 137), 
+                      _target(target) {
+    printStr("ShrubberyCreationForm created using a target! :D", "Y");
 }
 
-Form::Form(const std::string& name, const int gradeSign, const int gradeExec) 
-                    : _name(name), 
-                      _signed(false), 
-                      _gradeSign(gradeSign), 
-                      _gradeExec(gradeExec) {
-    printStr(name + " created using a name & both grades! :D", "Y");
-    if (gradeSign < Bureaucrat::maxGrade || gradeExec < Bureaucrat::maxGrade)
-        throw Form::GradeTooHighException();
-    if (gradeSign > Bureaucrat::minGrade || gradeExec > Bureaucrat::minGrade)
-        throw Form::GradeTooLowException();
-}
-
-Form::Form(const Form & other) 
-                    : _name(other._name), 
-                      _signed(false), 
-                      _gradeSign(other._gradeSign), 
-                      _gradeExec(other._gradeExec) {  
-    printStr(_name + " copied (deep copy unnecessary)! :D", "Y");
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & other) 
+                     : AForm(other.getName(), other.getSignGrade(), other.getExecGrade()), 
+                      _target(other._target) {  
+    printStr(this->getName() + " copied (deep copy unnecessary)! :D", "Y");
     *this = other;
 }
 
-Form::~Form(void){
-    printStr("Form destroyed! D:", "Y");
+ShrubberyCreationForm::~ShrubberyCreationForm(void){
+    printStr("ShrubberyCreationForm destroyed! D:", "Y");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
-Form & Form::operator = (const Form & other) {
-    printStr("Form assigned (deep is unnecessary)! :D", "G");
-    this->_signed = other._signed;
+ShrubberyCreationForm & ShrubberyCreationForm::operator = (const ShrubberyCreationForm & other) {
+    printStr("ShrubberyCreationForm assigned (deep is unnecessary)! :D", "Y");
+    this->setSigned(other.isSigned());
     return *this;
 }
 
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-const std::string Form::getName(void) const {
-    return this-> _name;
-}
-
-int Form::getSignGrade(void) const {
-    return this->_gradeSign;
-}
-
-int Form::getExecGrade(void) const {
-    return this->_gradeExec;
-}
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-const char* Form::GradeTooHighException::what(void) const throw() {
+const char* ShrubberyCreationForm::GradeTooHighException::what(void) const throw() {
     static std::string msg = std::string(RED) 
-            + "Form's grade is too high! (< 1) 💀" + std::string(RESET);
+            + "ShrubberyCreationForm's grade is too high! (< 1) 💀" + std::string(RESET);
     return msg.c_str();
 }
 
-const char* Form::GradeTooLowException::what(void) const throw() {
+const char* ShrubberyCreationForm::GradeTooLowException::what(void) const throw() {
     static std::string msg = std::string(RED) 
-            + "Form's grade is too low! (> 150) 💀" + std::string(RESET);
+            + "ShrubberyCreationForm's grade is too low! (> 150) 💀" + std::string(RESET);
     return msg.c_str();
 }
 
-void        Form::beSigned(Bureaucrat& bureaucrat) {
-    if (bureaucrat.getGrade() > this->_gradeSign) {
-        // printStr(this->_name + " cannot be signed! ❌", "R");
-        throw Form::GradeTooLowException();
+const char* ShrubberyCreationForm::FormUnsignedException::what(void) const throw() {
+    static std::string msg = std::string(RED) 
+            + "ShrubberyCreationForm is unsigned! 💀" + std::string(RESET);
+    return msg.c_str();
+}
+
+void        ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+    if (executor.getGrade() > this->getExecGrade()) {
+        throw ShrubberyCreationForm::GradeTooLowException();
+    } else if (!this->isSigned()) {
+        throw ShrubberyCreationForm::FormUnsignedException();
     } else {
-        // printStr(this->_name + " signed! 📝", "G");
-        this->_signed = true;
+        std::ofstream file((this->_target + "_shrubbery").c_str());
+        if (file.is_open()) {
+            file << "      /\\      \n"
+                    "     /\\*\\     \n"
+                    "    /\\O\\*\\    \n"
+                    "   /*/\\/\\/\\   \n"
+                    "  /\\O\\/\\*\\/\\  \n"
+                    " /\\*\\/\\*\\/\\/\\ \n"
+                    "/\\O\\/\\/*/\\/O/\\ \n"
+                    "      ||      \n"
+                    "      ||      \n"
+                    "      ||      \n";
+            file.close();
+        }
     }
 }
 
@@ -121,8 +111,3 @@ void        Form::beSigned(Bureaucrat& bureaucrat) {
 // ************************************************************************** //
 //                            Non-member Functions                            //
 // ************************************************************************** //
-std::ostream & operator << (std::ostream & out, const Form& f) {
-    out << f.getName() << "'s signGrade: " << f.getSignGrade() 
-                       << ", execGrade: " << f.getExecGrade() << std::endl;
-    return out;
-}

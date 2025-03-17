@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,27 +16,29 @@
 
 class Bureaucrat;  // forward delcaration to avoid circular dependency
 
-class Form {
+class AForm {
     
     public:
 
         /* construcotrs & destructors */
-        Form(void);
-        Form(const std::string& name);
-        Form(const std::string& name, const int gradeSign, const int gradeExec);
-        Form(const Form &other);
-        ~Form(void);
+        AForm(void);
+        AForm(const std::string& name);
+        AForm(const std::string& name, const int gradeSign, const int gradeExec);
+        AForm(const AForm &other);
+        virtual ~AForm(void);
 
         /* operator overloads */
-        Form & operator = (const Form &other);
+        AForm & operator = (const AForm &other);
         
         /* accessors */
         const std::string   getName(void) const;
         int                 getSignGrade(void) const;  // const on return
         int                 getExecGrade(void) const;  // has no effect
+        bool                isSigned(void) const;
 
         /* member functions */
         void                beSigned(Bureaucrat& bureaucrat);
+        virtual void        execute(Bureaucrat const & executor) const = 0;
 
         /* nested classes */
         /* 
@@ -55,8 +57,15 @@ class Form {
             public:
                 virtual const char* what(void) const throw();
         };
+
+        class FormUnsignedException : public std::exception {
+            public:
+                virtual const char* what(void) const throw();
+        };
         
     protected:
+
+        void            setSigned(bool signedStatus);
 
     private:
 
@@ -68,4 +77,4 @@ class Form {
 };
 
 /* non-member functions & operators */
-std::ostream &	operator<<(std::ostream & os, Form const & obj);
+std::ostream &	operator << (std::ostream & os, AForm const & obj);

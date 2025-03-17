@@ -98,14 +98,27 @@ const char* Bureaucrat::GradeTooLowException::what(void) const throw() {
     return msg.c_str();
 }
 
-void        Bureaucrat::signForm(Form& form) {
+void        Bureaucrat::signForm(AForm& form) {
     try {
         form.beSigned(*this);
         std::cout << GREEN << this->getName() + " signs " + form.getName() 
-                                            + " form! 📝" << RESET << std::endl;
+                                            + " 📝" << RESET << std::endl;
     } catch (const std::exception & e) {
-        std::cout << RED << this->getName() + " cannot sign " + form.getName() 
-                                            + " form! ❌" << RESET << std::endl;
+        std::cout << RED << this->getName() + " is " 
+        << this->getGrade()-form.getSignGrade() << " levels too junior to sign " 
+                                + form.getName() + " ❌" << RESET << std::endl;
+    }
+}
+
+void        Bureaucrat::executeForm(AForm const & form) {
+    try {
+        form.execute(*this);
+        std::cout << GREEN << this->getName() + " executes " + form.getName() 
+                                            + " 🚀" << RESET << std::endl;
+    } catch (const std::exception & e) {
+        std::cout << RED << this->getName() + " is " 
+        << this->getGrade()-form.getExecGrade() << " levels too junior to execute " 
+                                + form.getName() + " ❌" << RESET << std::endl;
     }
 }
 
@@ -116,7 +129,7 @@ void    Bureaucrat::incrementGrade(int d) {
     if (this->getGrade() - d < maxGrade) {
         throw GradeTooHighException();   // return is redundant
     }
-    std::cout << GREEN << this->getName() + "'s grade incremented by " << d 
+    std::cout << CYAN << this->getName() + "'s grade incremented by " << d 
                                                 << " 🔼" << RESET << std::endl;
     this->setGrade(this->getGrade() - d);
 }

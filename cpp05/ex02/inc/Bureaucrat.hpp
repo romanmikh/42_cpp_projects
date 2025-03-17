@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,39 @@
 
 #pragma once
 #include "../inc/Utils.hpp"
-#include "../inc/Bureaucrat.hpp"
+#include "../inc/AForm.hpp"
 
-class Bureaucrat;  // forward delcaration to avoid circular dependency
+class AForm;  // forward delcaration to avoid circular dependency
 
-class Form {
+class Bureaucrat {
     
     public:
 
         /* construcotrs & destructors */
-        Form(void);
-        Form(const std::string& name);
-        Form(const std::string& name, const int gradeSign, const int gradeExec);
-        Form(const Form &other);
-        ~Form(void);
+        Bureaucrat(void);
+        Bureaucrat(const std::string name);
+        Bureaucrat(const std::string name, int grade);
+        Bureaucrat(const Bureaucrat &other);
+        ~Bureaucrat(void);
 
         /* operator overloads */
-        Form & operator = (const Form &other);
+        Bureaucrat & operator = (const Bureaucrat &other);
         
         /* accessors */
         const std::string   getName(void) const;
-        int                 getSignGrade(void) const;  // const on return
-        int                 getExecGrade(void) const;  // has no effect
+        int                 getGrade(void) const;
+        void                setGrade(int grade);
 
         /* member functions */
-        void                beSigned(Bureaucrat& bureaucrat);
+        void                incrementGrade(int d);
+        void                decrementGrade(int d);
+        void                signForm(AForm& form);
+        void                executeForm(AForm const & form);
+
+        /* static values */
+        static const int    maxGrade = 1;
+        static const int    minGrade = 150;
+
 
         /* nested classes */
         /* 
@@ -48,7 +56,7 @@ class Form {
         */
         class GradeTooHighException : public std::exception {
             public:
-                virtual const char* what(void) const throw();  // void forbidden
+                virtual const char* what(void) const throw();
         };
 
         class GradeTooLowException : public std::exception {
@@ -59,13 +67,10 @@ class Form {
     protected:
 
     private:
-
         const std::string   _name;
-        bool                _signed;
-        const int           _gradeSign;
-        const int           _gradeExec;
+        int                 _grade;
 
 };
 
 /* non-member functions & operators */
-std::ostream &	operator<<(std::ostream & os, Form const & obj);
+std::ostream &	operator<<(std::ostream & os, Bureaucrat const & obj);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,39 +13,29 @@
 #pragma once
 #include "../inc/Utils.hpp"
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/AForm.hpp"
 
 class Bureaucrat;  // forward delcaration to avoid circular dependency
 
-class Form {
+class PresidentialPardonForm : public AForm{
     
     public:
 
         /* construcotrs & destructors */
-        Form(void);
-        Form(const std::string& name);
-        Form(const std::string& name, const int gradeSign, const int gradeExec);
-        Form(const Form &other);
-        ~Form(void);
+        PresidentialPardonForm(void);
+        PresidentialPardonForm(const std::string target);
+        PresidentialPardonForm(const PresidentialPardonForm &other);
+        ~PresidentialPardonForm(void);
 
         /* operator overloads */
-        Form & operator = (const Form &other);
+        PresidentialPardonForm & operator = (const PresidentialPardonForm &other);
         
         /* accessors */
-        const std::string   getName(void) const;
-        int                 getSignGrade(void) const;  // const on return
-        int                 getExecGrade(void) const;  // has no effect
 
         /* member functions */
-        void                beSigned(Bureaucrat& bureaucrat);
+        void        execute(Bureaucrat const & executor) const;
 
         /* nested classes */
-        /* 
-            - virtual: allows what() to be overridden downstream (polymorphism)
-            - const: what() does not modify the object when called
-            - what(): function name, part of std::exception
-            - const: can be called on const objects
-            - throw(): what() does *not* throw exceptions
-        */
         class GradeTooHighException : public std::exception {
             public:
                 virtual const char* what(void) const throw();  // void forbidden
@@ -55,17 +45,18 @@ class Form {
             public:
                 virtual const char* what(void) const throw();
         };
+
+        class FormUnsignedException : public std::exception {
+            public:
+                virtual const char* what(void) const throw();
+        };
         
     protected:
 
     private:
 
-        const std::string   _name;
-        bool                _signed;
-        const int           _gradeSign;
-        const int           _gradeExec;
+        std::string   _target;
 
 };
 
 /* non-member functions & operators */
-std::ostream &	operator<<(std::ostream & os, Form const & obj);

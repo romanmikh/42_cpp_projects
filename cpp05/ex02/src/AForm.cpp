@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                            :+:      :+:    :+:   */
+/*   AForm.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rocky <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/Form.hpp"
+#include "../inc/AForm.hpp"
 
 #define RESET	"\e[0m"
 #define RED		"\e[31m"
@@ -24,15 +24,15 @@
 // ************************************************************************** //
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
-Form::Form(void) 
-                    : _name("MarriageForm"), 
+AForm::AForm(void) 
+                    : _name("MarriageAForm"), 
                       _signed(false), 
                       _gradeSign(100), 
                       _gradeExec(100) {
-    printStr("Form default created! :D", "Y");
+    printStr("AForm default created! :D", "Y");
 }
 
-Form::Form(const std::string& name) 
+AForm::AForm(const std::string& name) 
                     : _name(name), 
                       _signed(false), 
                       _gradeSign(100), 
@@ -40,19 +40,19 @@ Form::Form(const std::string& name)
     printStr(name + " created using a name! :D", "Y");
 }
 
-Form::Form(const std::string& name, const int gradeSign, const int gradeExec) 
+AForm::AForm(const std::string& name, const int gradeSign, const int gradeExec) 
                     : _name(name), 
                       _signed(false), 
                       _gradeSign(gradeSign), 
                       _gradeExec(gradeExec) {
     printStr(name + " created using a name & both grades! :D", "Y");
     if (gradeSign < Bureaucrat::maxGrade || gradeExec < Bureaucrat::maxGrade)
-        throw Form::GradeTooHighException();
+        throw AForm::GradeTooHighException();
     if (gradeSign > Bureaucrat::minGrade || gradeExec > Bureaucrat::minGrade)
-        throw Form::GradeTooLowException();
+        throw AForm::GradeTooLowException();
 }
 
-Form::Form(const Form & other) 
+AForm::AForm(const AForm & other) 
                     : _name(other._name), 
                       _signed(false), 
                       _gradeSign(other._gradeSign), 
@@ -61,15 +61,15 @@ Form::Form(const Form & other)
     *this = other;
 }
 
-Form::~Form(void){
-    printStr("Form destroyed! D:", "Y");
+AForm::~AForm(void){
+    printStr("AForm destroyed! D:", "Y");
 }
 
 // ************************************************************************** //
 //                           Operator Overloads                               //
 // ************************************************************************** //
-Form & Form::operator = (const Form & other) {
-    printStr("Form assigned (deep is unnecessary)! :D", "G");
+AForm & AForm::operator = (const AForm & other) {
+    printStr("AForm assigned (deep is unnecessary)! :D", "G");
     this->_signed = other._signed;
     return *this;
 }
@@ -77,42 +77,69 @@ Form & Form::operator = (const Form & other) {
 // ************************************************************************** //
 //                               Accessors                                    //
 // ************************************************************************** //
-const std::string Form::getName(void) const {
+const std::string AForm::getName(void) const {
     return this-> _name;
 }
 
-int Form::getSignGrade(void) const {
+int AForm::getSignGrade(void) const {
     return this->_gradeSign;
 }
 
-int Form::getExecGrade(void) const {
+int AForm::getExecGrade(void) const {
     return this->_gradeExec;
+}
+
+bool AForm::isSigned(void) const {
+    return this->_signed;
+}
+
+void AForm::setSigned(bool signedStatus) {
+    this->_signed = signedStatus;
 }
 
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-const char* Form::GradeTooHighException::what(void) const throw() {
+const char* AForm::GradeTooHighException::what(void) const throw() {
     static std::string msg = std::string(RED) 
-            + "Form's grade is too high! (< 1) 💀" + std::string(RESET);
+            + "AForm's grade is too high! (< 1) 💀" + std::string(RESET);
     return msg.c_str();
 }
 
-const char* Form::GradeTooLowException::what(void) const throw() {
+const char* AForm::GradeTooLowException::what(void) const throw() {
     static std::string msg = std::string(RED) 
-            + "Form's grade is too low! (> 150) 💀" + std::string(RESET);
+            + "AForm's grade is too low! (> 150) 💀" + std::string(RESET);
     return msg.c_str();
 }
 
-void        Form::beSigned(Bureaucrat& bureaucrat) {
+const char* AForm::FormUnsignedException::what(void) const throw() {
+    static std::string msg = std::string(RED) 
+            + "AForm is unsigned! 💀" + std::string(RESET);
+    return msg.c_str();
+}
+
+void        AForm::beSigned(Bureaucrat& bureaucrat) {
     if (bureaucrat.getGrade() > this->_gradeSign) {
         // printStr(this->_name + " cannot be signed! ❌", "R");
-        throw Form::GradeTooLowException();
+        throw AForm::GradeTooLowException();
     } else {
         // printStr(this->_name + " signed! 📝", "G");
         this->_signed = true;
     }
 }
+
+// void        AForm::execute(Bureaucrat const & executor) const {
+//     if (!this->isSigned()) {
+//         printStr(this->_name + " cannot be executed (unsigned)! ❌", "R");
+//         throw AForm::FormUnsignedException();
+//     } else if (executor.getGrade() > this->_gradeExec) {
+//         printStr(this->_name + " cannot be executed (b too low)! ❌", "R");
+//         throw AForm::GradeTooLowException();
+//     }
+//      else {
+//         printStr(this->_name + " executed! 📝", "G");
+//     }
+// }
 
 // ************************************************************************** //
 //                             Private Functions                              //
@@ -121,7 +148,7 @@ void        Form::beSigned(Bureaucrat& bureaucrat) {
 // ************************************************************************** //
 //                            Non-member Functions                            //
 // ************************************************************************** //
-std::ostream & operator << (std::ostream & out, const Form& f) {
+std::ostream & operator << (std::ostream & out, const AForm& f) {
     out << f.getName() << "'s signGrade: " << f.getSignGrade() 
                        << ", execGrade: " << f.getExecGrade() << std::endl;
     return out;
