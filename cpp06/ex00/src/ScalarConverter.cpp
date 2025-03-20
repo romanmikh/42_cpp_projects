@@ -83,13 +83,15 @@ void ScalarConverter::convert(const std::string &str) {
     if (_handlePseudoLiterals(str, vFloat, vDouble))
         return;
 
-    if (str.length() == 1 && !isdigit(str[0]) && str[0] >= 32 && str[0] <= 126) {
+    if (str.length() == 1 && !isdigit(str[0]) && str[0] >= 32 && str[0] <= 126)
+    {
         vInt = static_cast<int>(str[0]);
         std::cout << "int: " << vInt << std::endl;
         std::cout << "char: '" << str[0] << "'" << std::endl;
         vFloat = static_cast<float>(vInt);
         vDouble = static_cast<double>(vInt);
-    } else {
+    }
+    else {
         std::istringstream iss(str);
         iss >> vInt;
         std::cout << "int: " << static_cast<int>(vInt) << std::endl;
