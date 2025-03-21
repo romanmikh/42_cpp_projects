@@ -13,6 +13,10 @@
 #include "../inc/Utils.hpp"
 #include "../inc/iter.hpp"
 
+/*
+  - need <int> to use template because 
+  - compiler cannot deduce the type automatically
+*/
 int main(void)
 {
     const size_t len = 5;
@@ -54,3 +58,31 @@ int main(void)
 
     return 0;
 }
+
+
+// class Awesome
+// {
+//   public:
+//     Awesome( void ) : _n( 42 ) { return; }
+//     int get( void ) const { return this->_n; }
+//   private:
+//     int _n;
+// };
+// std::ostream & operator<<( std::ostream & o, Awesome const & rhs )
+// {
+//   o << rhs.get();
+//   return o;
+// }
+// template< typename T >
+// void print( T& x )
+// {
+//   std::cout << x << std::endl;
+//   return;
+// }
+// int main() {
+//   int tab[] = { 0, 1, 2, 3, 4 };
+//   Awesome tab2[5];
+//   iter( tab, 5, print<const int> );
+//   iter( tab2, 5, print<Awesome> );
+//   return 0;
+// }
