@@ -32,5 +32,6 @@ int main(int ac, char **av)
     BitcoinExchange exchange;
     exchange.readData(av[1]);
     exchange.printFile(av[1]);
+    
     return 0;
 }
