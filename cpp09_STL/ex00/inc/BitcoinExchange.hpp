@@ -34,9 +34,10 @@ class BitcoinExchange {
         /* accessors */
 
         /* member functions */
-        void            readData(const char *filename);
-        int             isFileEmpty(std::ifstream &file);
-        void            printFile(std::string fileName);
+        void            readData(const char *filename) const;
+        int             isFileEmpty(std::ifstream &file) const;
+        void            printFile(std::string fileName) const;
+        void            processFile(std::string fileName) const;
 
         /* static values */
 

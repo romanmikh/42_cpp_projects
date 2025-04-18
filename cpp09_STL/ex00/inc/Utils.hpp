@@ -57,7 +57,50 @@
 /* Time */
 #include <ctime>
 
+/* Strings */
+std::vector<std::string>    split(const std::string& str, char delimiter);
+std::vector<std::string>    splitByStr(const std::string& str, const std::string& delim);
+std::string                 trim(const std::string&);
+void                        printStr(const std::string& text, const std::string& colour = "RESET");
 
-void	        handleCtrlD(void);
-unsigned int    getUnsignedInt(const std::string& prompt);
-void            printStr(const std::string& text, const std::string& colour = "RESET");
+/* Conversions */
+std::string                 intToString(int value);
+std::string                 uintToString(unsigned int value);
+std::string                 boolToString(bool value);
+std::string                 sizeToString(size_t value);
+bool                        parseInt(const std::string& s, int& out);
+bool                        parseFloat(const std::string& s, float& out);
+unsigned int                getUnsignedInt(const std::string& prompt);
+
+/* Validations */
+bool                        isValidDate(const std::string& date);
+bool                        isInteger(const std::string& s);
+bool                        isFloat(const std::string& s);
+
+/* Misc */
+std::string                 getCurrentTime(void);
+void	                    handleCtrlD(void);
+
+
+/* Colours */
+#define RESET   "\e[0m"
+#define RED     "\e[31m"
+#define GREEN   "\e[32m"
+#define YELLOW  "\e[33m"
+#define BLUE    "\e[34m"
+#define PURPLE  "\e[35m"
+#define CYAN    "\e[36m"
+#define WHITE   "\e[37m"
+#define BRED    "\e[1;31m"
+#define BGREEN  "\e[1;32m"
+#define BYELLOW "\e[1;33m"
+#define BBLUE   "\e[1;34m"
+#define BPURPLE "\e[1;35m"
+#define BCYAN   "\e[1;36m"
+#define BGR     "\e[41m"
+#define BGG     "\e[42m"
+#define BGY     "\e[43m"
+#define BGB     "\e[44m"
+#define BGP     "\e[45m"
+#define BGC     "\e[46m"
+#define BGW     "\e[47m"

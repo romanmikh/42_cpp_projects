@@ -25,16 +25,16 @@
 //             Orthodox Canonical Constructors & Desctructors                 //
 // ************************************************************************** //
 BitcoinExchange::BitcoinExchange(void) {
-    printStr("BitcoinExchange created! :D", "G");
+    printStr("BitcoinExchange created! :D", GREEN);
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange & other) {
-    printStr("BitcoinExchange copied! :D", "G");
+    printStr("BitcoinExchange copied! :D", GREEN);
     *this = other;
 }
 
 BitcoinExchange::~BitcoinExchange(void){
-    printStr("BitcoinExchange destroyed! D:\n", "G");
+    printStr("BitcoinExchange destroyed! D:\n", GREEN);
 }
 
 // ************************************************************************** //
@@ -53,7 +53,7 @@ BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other) {
 // ************************************************************************** //
 //                             Public Functions                               //
 // ************************************************************************** //
-int 	BitcoinExchange::isFileEmpty(std::ifstream &file) {
+int 	BitcoinExchange::isFileEmpty(std::ifstream &file) const {
 	file.seekg(0, std::ios::end);
 	if (file.tellg() == 0)
 		return 1;
@@ -61,7 +61,7 @@ int 	BitcoinExchange::isFileEmpty(std::ifstream &file) {
 	return 0;
 }
 
-void 	BitcoinExchange::printFile(std::string fileName)
+void 	BitcoinExchange::printFile(std::string fileName) const
 {
 	std::ifstream file(fileName.c_str());
 	if (!file) {
@@ -75,9 +75,9 @@ void 	BitcoinExchange::printFile(std::string fileName)
 		std::cout << newLine << std::endl;
 	}
 	file.close();
-}\
+}
 
-void    BitcoinExchange::readData(const char * filename) {
+void    BitcoinExchange::readData(const char * filename) const {
     std::ifstream file(filename);
     if (!file.is_open())
     {
@@ -88,6 +88,53 @@ void    BitcoinExchange::readData(const char * filename) {
 		std::cerr << "> Error: " << filename << " is empty." << std::endl;
 		return ;
 	}
+}
+
+void    BitcoinExchange::processFile(std::string fileName) const {
+	std::ifstream file(fileName.c_str());
+	if (!file) {
+		std::cerr << "> Error: cannot open " << fileName 
+					<< " for reading." << std::endl;
+		return ;
+	}
+
+	std::string line;
+	while (std::getline(file, line)) {
+		if (line.empty() || line[0] == 'd') {
+			continue;
+		}
+		std::vector<std::string> split = splitByStr(line, " | ");
+		if (split.size() != 2) {
+			std::cerr << RED << "> Error: invalid line format: " << line << RESET << std::endl;
+			continue;
+		}
+		if (!isValidDate(split[0])) {
+			std::cerr << RED << "> Error: invalid date format: " << split[0] << RESET << std::endl;
+			continue;
+		}
+		int valInt;
+		float valFloat;
+		if (parseInt(split[1], valInt)) {
+			if (valInt < 0) {
+				std::cerr << RED << "> Error: negative value: " << line << RESET << std::endl;
+				continue;
+			}
+		} else if (parseFloat(split[1], valFloat)) {
+			if (valFloat < 0 || valFloat > 1000) {
+				std::cerr << RED << "> Error: negative value: " << line << RESET << std::endl;
+				continue;
+			}
+		} else {
+			std::cerr << RED << "> Error: invalid value format: " << line << RESET << std::endl;
+			continue;
+		}
+
+
+
+		// Process each line of the file
+		std::cout << "Processing line: " << line << std::endl;
+	}
+	file.close();
 }
 
 // ************************************************************************** //
