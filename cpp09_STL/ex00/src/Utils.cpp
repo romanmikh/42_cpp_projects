@@ -61,6 +61,17 @@ bool parseFloat(const std::string& s, float& out) {
     return (iss >> out) && iss.eof();
 }
 
+int dateToInt(const std::string &date) {
+	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+		return -1; // invalid format
+
+	std::string y = date.substr(0, 4);
+	std::string m = date.substr(5, 2);
+	std::string d = date.substr(8, 2);
+
+	return std::atoi((y + m + d).c_str());
+}
+
 // ************************************************************************** //
 //                                 Strings                                    //
 // ************************************************************************** //
@@ -145,6 +156,42 @@ bool isValidDate(const std::string& date) {
     return day <= daysInMonth[month - 1];
 }
 
+int  isFileEmpty(std::ifstream &file) {
+	file.seekg(0, std::ios::end);
+	if (file.tellg() == 0)
+		return 1;
+	file.seekg(0, std::ios::beg);
+	return 0;
+}
+
+void  printFile(std::string fileName)
+{
+	std::ifstream file(fileName.c_str());
+	if (!file) {
+		std::cerr << "> Error: cannot open " << fileName 
+					<< " for reading." << std::endl;
+		return ;
+	}
+
+	std::string newLine;
+	while (std::getline(file, newLine)) {
+		std::cout << newLine << std::endl;
+	}
+	file.close();
+}
+
+bool isValidFile(const char *filename, std::ifstream &file) {
+    file.open(filename);
+    if (!file.is_open()) {
+        std::cerr << "> Error: " << filename << " not found." << std::endl;
+        return false;
+    }
+    if (isFileEmpty(file)) {
+        std::cerr << "> Error: " << filename << " is empty." << std::endl;
+        return false;
+    }
+    return true;
+} 
 // ************************************************************************** //
 //                                   Misc.                                    //
 // ************************************************************************** //

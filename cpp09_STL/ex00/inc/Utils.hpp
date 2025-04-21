@@ -71,11 +71,15 @@ std::string                 sizeToString(size_t value);
 bool                        parseInt(const std::string& s, int& out);
 bool                        parseFloat(const std::string& s, float& out);
 unsigned int                getUnsignedInt(const std::string& prompt);
+int                         dateToInt(const std::string &date);
 
 /* Validations */
 bool                        isValidDate(const std::string& date);
 bool                        isInteger(const std::string& s);
 bool                        isFloat(const std::string& s);
+int                         isFileEmpty(std::ifstream &file);
+void                        printFile(std::string fileName);
+bool                        isValidFile(const char *filename, std::ifstream &file);
 
 /* Misc */
 std::string                 getCurrentTime(void);
