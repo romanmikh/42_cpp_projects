@@ -17,7 +17,7 @@ NAME	= PmergeMe
 
 # Compiler and compilation flags
 CC		= c++
-CFLAGS	= -Werror -Wextra -Wall #-std=c++98
+CFLAGS	= -Werror -Wextra -Wall -std=c++98
 
 # Build files and directories
 SRC_PATH 	= ./src/
@@ -57,6 +57,6 @@ re: fclean all
 
 # Valgrind rule
 valgrind: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --num-callers=20 --log-file=valgrind_out.txt > ./PmergeMe "3 9 8 5 6 7 1 0 2 4"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --num-callers=20 --log-file=valgrind_out.txt ./PmergeMe "1 2 3 4"
 
 .PHONY: all re clean fclean valgrind

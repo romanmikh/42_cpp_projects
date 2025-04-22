@@ -57,6 +57,7 @@
 /* Time */
 #include <ctime>
 
+
 /* Strings */
 std::vector<std::string>    split(const std::string& str, char delimiter);
 std::vector<std::string>    splitByStr(const std::string& str, const std::string& delim);
@@ -75,7 +76,6 @@ int                         dateToInt(const std::string &date);
 int                         strToInt(const std::string &str);
 float                       strToFloat(const std::string &str);
 
-
 /* Validations */
 bool                        isValidDate(const std::string& date);
 bool                        isInteger(const std::string& s);
@@ -87,7 +87,6 @@ bool                        isValidFile(const char *filename, std::ifstream &fil
 /* Misc */
 std::string                 getCurrentTime(void);
 void	                    handleCtrlD(void);
-
 
 /* Colours */
 #define RESET   "\e[0m"
@@ -111,3 +110,72 @@ void	                    handleCtrlD(void);
 #define BGP     "\e[45m"
 #define BGC     "\e[46m"
 #define BGW     "\e[47m"
+
+/* Templates */
+template <typename Container>
+void printContainer(const Container &c, const std::string &label)
+{
+	std::cout << PURPLE << label << RESET;
+	for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) { std::cout << *it << " ";	}
+	std::cout << std::endl;
+}
+
+template <typename Container>
+bool isSorted(const Container &c)
+{
+    if (c.empty()) return true;
+
+    typename Container::const_iterator it = c.begin();
+    typename Container::const_iterator next = it;
+    ++next;
+
+	for (; next != c.end(); ++next, ++it) {
+        if (*it >= *next)
+            return false;
+	}
+	return true;
+}
+
+template <typename Iterator, typename T>
+Iterator binaryInsertPos(Iterator first, Iterator last, const T &value)
+{
+    typedef typename std::iterator_traits<Iterator>::difference_type diff_t;
+    diff_t len = std::distance(first, last);
+
+    while (len > 0) {
+        Iterator mid = first;
+        diff_t half = len / 2;
+        std::advance(mid, half);
+
+        if (value < *mid) {
+            len = half;
+        } else {
+            std::advance(first, half + 1);
+            len -= half + 1;
+        }
+    }
+    return first;
+}
+
+template <typename List>
+typename List::iterator advanceIt(List &l, int n) {
+	typename List::iterator it = l.begin();
+	std::advance(it, n);
+	return it;
+}
+
+template <typename T>
+std::list<T> vecToList(const std::vector<T> &vec) {
+	std::list<T> result;
+	for (typename std::vector<T>::const_iterator it = vec.begin(); it != vec.end(); ++it)
+		result.push_back(*it);
+	return result;
+}
+
+template <typename T>
+std::vector<T> listToVec(const std::list<T> &list) {
+	std::vector<T> result;
+	for (typename std::list<T>::const_iterator it = list.begin(); it != list.end(); ++it)
+		result.push_back(*it);
+	return result;
+}

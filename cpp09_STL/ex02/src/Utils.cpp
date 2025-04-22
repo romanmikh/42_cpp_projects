@@ -130,6 +130,10 @@ std::string trim(const std::string& s) {
     return (start < end) ? std::string(start, end) : "";
 }
 
+
+// ************************************************************************** //
+//                                     Print                                  //
+// ************************************************************************** //
 void    printStr(const std::string &text, const std::string &colour) {
    std::cout << colour << text << "\033[0m" << std::endl;
 }

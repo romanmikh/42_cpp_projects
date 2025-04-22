@@ -17,11 +17,29 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        printStr("Usage: ./PmergeMe \"9 1 0 2 8 3 7 4 6 5\"", "R");
+        printStr("Usage: ./PmergeMe \"$(shuf -i 1-20 | tr '\\n' ' ')\"", RED);
         return 1;
     }
 
     PmergeMe algo;
-    algo.sort(av[1]);
+    std::cout << YELLOW << "Unsorted: " << RESET << av[1] << std::endl;
+    
+    
+    /* vector approach */
+    clock_t startVec = clock();
+    algo.sortVec(av[1]);
+    double elapsedVecTime = static_cast<double>(clock() - startVec) / CLOCKS_PER_SEC;
+
+
+    /* list approach */
+    clock_t startList = clock();
+    algo.sortList(av[1]);
+    double elapsedListTime = static_cast<double>(clock() - startList) / CLOCKS_PER_SEC;
+
+
+    std::cout << "Elapsed time using vectors: " << elapsedVecTime * 1000 << " ms" << std::endl;
+    std::cout << "Elapsed time using lists:   " << elapsedListTime * 1000 << " ms" << std::endl;
+
+
     return 0;
 }

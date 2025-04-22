@@ -13,13 +13,7 @@
 #pragma once
 #include "../inc/Utils.hpp"
 
-/* non-member functions & operators */
-
 class PmergeMe {
-    
-    protected:
-
-    private:
 
     public:
 
@@ -30,14 +24,18 @@ class PmergeMe {
 
         /* operator overloads */
         PmergeMe & operator = (const PmergeMe &);
-        
-        /* accessors */
 
         /* member functions */
-        void        sort(const std::string &);
+        int         jacobsthal(int n);
 
-        /* static values */
+        void            sortVec(const std::string &);
+        void            mergeVec(std::vector<int> &vec1, std::vector<int> &vec2, int left, int mid, int right);
+        void            mergeSortVec(std::vector<int> &vec1, std::vector<int> &vec2, int left, int right);
+        std::vector<int> smallSortVec(const std::vector<int> &A, const std::vector<int> &B);
 
-        /* nested classes */
-
+        void            sortList(const std::string &);
+        void            mergeList(std::list<int> &vec1, std::list<int> &vec2, int left, int mid, int right);
+        // void            mergeSortList(std::list<int> &vec1, std::list<int> &vec2, int left, int right);
+        std::list<int>  smallSortList(const std::list<int> &A, const std::list<int> &B);
+        void            mergeSortList(std::list<int> &list1, std::list<int> &list2);
 };
