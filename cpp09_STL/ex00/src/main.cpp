@@ -25,7 +25,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        printStr("Usage: ./btc [filename]", "R");
+        printStr("Usage: ./btc input.txt", RED);
         return 1;
     }
 

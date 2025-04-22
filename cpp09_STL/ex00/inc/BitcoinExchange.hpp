@@ -20,6 +20,10 @@ class BitcoinExchange {
     protected:
 
     private:
+        std::map<std::string, float> loadExchangeRates(const char *filename) const;
+        bool parseLine(const std::string &line, std::string &date, std::string &valueStr) const;
+        void processEntry(const std::string &date, const std::string &valueStr, const std::map<std::string, float> &rates) const;
+    
 
     public:
 
@@ -35,7 +39,7 @@ class BitcoinExchange {
 
         /* member functions */
         bool            readData(const char *filename, std::ifstream &file) const;
-        int             isFileEmpty(std::ifstream &file) const;
+        // int             isFileEmpty(std::ifstream &file) const;
         void            printFile(std::string fileName) const;
         void            processFile(std::string fileName) const;
 

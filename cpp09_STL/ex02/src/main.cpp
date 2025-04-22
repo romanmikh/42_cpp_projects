@@ -15,30 +15,38 @@
 
 int main(int ac, char **av)
 {
-    if (ac != 2)
+    if (ac < 2)
     {
-        printStr("Usage: ./PmergeMe \"$(shuf -i 1-20 | tr '\\n' ' ')\"", RED);
+        printStr("Usage: ./PmergeMe $(shuf -i 1-15 | tr '\\n' ' ')", RED);
         return 1;
     }
 
+    std::string input;
+    for (int i = 1; i < ac; ++i) {
+        input += av[i];
+        if (i + 1 < ac)
+            input += " ";
+    }
+
     PmergeMe algo;
-    std::cout << YELLOW << "Unsorted: " << RESET << av[1] << std::endl;
+    std::cout << CYAN << "*** Ford-Johnson Merge-Insertion Sort *** " << RESET << std::endl << std::endl;
+    std::cout << YELLOW << "Unsorted: " << RESET << input << std::endl;
     
     
     /* vector approach */
     clock_t startVec = clock();
-    algo.sortVec(av[1]);
+    algo.sortVec(input);
     double elapsedVecTime = static_cast<double>(clock() - startVec) / CLOCKS_PER_SEC;
 
 
     /* list approach */
     clock_t startList = clock();
-    algo.sortList(av[1]);
+    algo.sortList(input);
     double elapsedListTime = static_cast<double>(clock() - startList) / CLOCKS_PER_SEC;
 
 
-    std::cout << "Elapsed time using vectors: " << elapsedVecTime * 1000 << " ms" << std::endl;
-    std::cout << "Elapsed time using lists:   " << elapsedListTime * 1000 << " ms" << std::endl;
+    std::cout << std::endl << "Elapsed time using vectors: " << GREEN << elapsedVecTime * 1000 << RESET << " ms" << std::endl;
+    std::cout << "Elapsed time using lists:   " << RED << elapsedListTime * 1000 << RESET << " ms" << std::endl;
 
 
     return 0;
