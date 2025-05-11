@@ -11,58 +11,50 @@
 /* ************************************************************************** */
 
 #include "../inc/Utils.hpp"
-#include "../inc/Array.hpp"
-
 #include <iostream>
-#include <Array.hpp>
+#include <string>
+#include "Array.hpp"
 
-#define MAX_VAL 750
-int main(int, char**)
-{
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+int main() {
+    printStr("-------------------- Default Constructor ---------------------", "G");
+    Array<int> a;
+    std::cout << "a.size() = " << a.size() << std::endl;
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
-    try
-    {
-        numbers[-2] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+    printStr("\n-------------------- Constructor with size ---------------------", "G");
+    Array<int> b(5);
+    for (unsigned i = 0; i < b.size(); ++i)
+        b[i] = i * 10;
+    std::cout << "b: ";
+    for (unsigned i = 0; i < b.size(); ++i)
+        std::cout << b[i] << " ";
+    std::cout << std::endl;
+
+    printStr("\n-------------------- Copy Constructor ---------------------", "G");
+    Array<int> c(b);
+    c[0] = 999;
+    std::cout << "c[0] = " << c[0] << ", b[0] = " << b[0] << " (should be different)" << std::endl;
+
+    printStr("\n-------------------- Assignment Constructor ---------------------", "G");
+    Array<int> d;
+    d = b;
+    d[1] = 888;
+    std::cout << "d[1] = " << d[1] << ", b[1] = " << b[1] << " (should be different)" << std::endl;
+
+    printStr("\n-------------------- Bounds Checking ---------------------", "G");
+    try {
+        std::cout << b[42] << std::endl;
+    } catch (std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
-    delete [] mirror;//
+    printStr("\n-------------------- Complex Type (strings) ---------------------", "G");
+    Array<std::string> e(3);
+    e[0] = "Hello";
+    e[1] = "world";
+    e[2] = "!";
+    for (unsigned i = 0; i < e.size(); ++i)
+        std::cout << e[i] << " ";
+    std::cout << std::endl;
+
     return 0;
 }
