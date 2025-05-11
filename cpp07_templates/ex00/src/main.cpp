@@ -25,6 +25,7 @@ int main(void)
     ::printStr("Originally:", "P");
     ::printValues(a, b);
     ::printStr("After swapping:", "P");
+    ::swap(a, b);
     ::printValues(a, b);
 
     std::cout << "min: " << ::min(a, b) << std::endl;
