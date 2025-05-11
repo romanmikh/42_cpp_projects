@@ -55,19 +55,41 @@ void identify(Base* p) {
     }
 }
 
+// void identify(Base& p) {
+//     if (A* a = dynamic_cast<A*>(&p)) {
+//         (void)a;
+//         std::cout << "Identified by reference: ";
+//         printStr("A", "P");
+//     } else if (B* b = dynamic_cast<B*>(&p)) {
+//         (void)b;
+//         std::cout << "Identified by reference: ";
+//         printStr("B", "P");
+//     } else if (C* c = dynamic_cast<C*>(&p)) {
+//         (void)c;
+//         std::cout << "Identified by reference: ";
+//         printStr("C", "P");
+//     } else {
+//         printStr("Error: Could not identify the reference", "R");
+//     }
+// }
+
 void identify(Base& p) {
-    if (A* a = dynamic_cast<A*>(&p)) {
-        std::cout << "Identified by reference: ";
+    std::cout << "Identified by reference: ";
+
+    try {
+        (void)dynamic_cast<A&>(p);
         printStr("A", "P");
-    } else if (B* b = dynamic_cast<B*>(&p)) {
-        std::cout << "Identified by reference: ";
+    } catch (...) {}
+
+    try {
+        (void)dynamic_cast<B&>(p);
         printStr("B", "P");
-    } else if (C* c = dynamic_cast<C*>(&p)) {
-        std::cout << "Identified by reference: ";
+    } catch (...) {}
+
+    try {
+        (void)dynamic_cast<C&>(p);
         printStr("C", "P");
-    } else {
-        printStr("Error: Could not identify the reference", "R");
-    }
+    } catch (...) {}
 }
 
 int main(void)
