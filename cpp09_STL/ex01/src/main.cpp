@@ -17,7 +17,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        printStr("Usage: ./RPN \"expression\"", "R");
+        printStr("Usage: ./RPN \"expression\"", RED);
         return 1;
     }
 
