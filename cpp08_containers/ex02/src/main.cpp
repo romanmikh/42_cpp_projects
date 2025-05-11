@@ -99,8 +99,6 @@
 
 
 /* my main()*/
-
-
 int rands(void) { return std::rand() % 100; }
 
 struct printWithComma {
@@ -132,11 +130,21 @@ int main(void)
 
     std::cout << BLUE << "Pushing 42..." << RESET << std::endl;
     mstack.push(42);
+
+    std::cout << YELLOW << "MutantStack contents: [" << RESET;
+    std::for_each(mstack.begin(), mstack.end(), printWithComma());
+    std::cout << YELLOW << "]\n" << RESET;
+
     std::cout << "Top element: " << mstack.top() << std::endl;
     std::cout << "Size: " << mstack.size() << std::endl << std::endl;
 
     std::cout << BLUE << "Popping top element..." << RESET << std::endl;
     mstack.pop();
+
+    std::cout << YELLOW << "MutantStack contents: [" << RESET;
+    std::for_each(mstack.begin(), mstack.end(), printWithComma());
+    std::cout << YELLOW << "]\n" << RESET;
+
     std::cout << "New top: " << mstack.top() << std::endl;
     std::cout << "Size after pop: " << mstack.size() << std::endl << std::endl;
 
