@@ -12,6 +12,12 @@
 
 #include "../inc/PmergeMe.hpp"
 
+// Ford-Johnson algorithm:
+// 1. Split input by pairs (A, B) such that A >= B into 2 containers
+// 2. Sort A using merge sort (O(n log n))
+// 3. Create Jacobsthal sequence to determine the order of inserting B elements
+// 4. Insert B elements into sorted A using binary search in Jacobsthal order
+
 // ************************************************************************** //
 //        Orthodox Canonical Constructors, Desctructors & Overloads           //
 // ************************************************************************** //
@@ -44,6 +50,7 @@ int PmergeMe::jacobsthal(int n) {
 // ************************************************************************** //
 //                             vector approach                                //
 // ************************************************************************** //
+// merge sort vec1 and carry vec2 along
 void PmergeMe::mergeVec(std::vector<int> &vec1, std::vector<int> &vec2, int left, int mid, int right) {
 	std::vector<int> temp1, temp2;
 	int i = left, j = mid + 1;
@@ -75,6 +82,7 @@ void PmergeMe::mergeVec(std::vector<int> &vec1, std::vector<int> &vec2, int left
 	}
 }
 
+// recursively split vec in halves until size 1, then merge sort
 void PmergeMe::mergeSortVec(std::vector<int> &vec1, std::vector<int> &vec2, int left, int right) {
 	if (left >= right) return;
 
@@ -147,7 +155,7 @@ void 	PmergeMe::sortVec(const std::string & expression) {
 	}
 	
 	// ************************************************************* //
-	// Sort container B recursively using merge sort
+	// Sort container A recursively using merge sort
 	// ************************************************************* //
 	mergeSortVec(A, B, 0, A.size() - 1);
 
